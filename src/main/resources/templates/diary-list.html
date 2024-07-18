@@ -17,11 +17,11 @@
   </div>
 
   <div class="results">
-    <div class="result-item" th:each="diary, iterStat : ${diaryList}" th:data-index="${iterStat.index}">
+    <div class="result-item" th:each="diary : ${diaryList}" th:data-index="${diary.diaryId}">
       <div class="profile">
         <img th:src="@{/images/profile1.jpg}" alt="Profile Image">
       </div>
-      <div class="details nickName" th:data-index="${iterStat.index}">
+      <div class="details nickName" th:data-index="${diary.diaryId}">
         <span th:text="${diary.nickName}">닉네임</span>
       </div>
       <div class="time">
@@ -33,7 +33,7 @@
         <span th:text="${diary.feel}">Software Development</span>
       </div>
       <div class="bookmark">
-        <button class="bookmark-btn" th:data-index="${iterStat.index}">🩶</button>
+        <button class="bookmark-btn">🩶</button>
       </div>
     </div>
   </div>
@@ -42,6 +42,7 @@
 
 
 <!-- modal -->
+<!-- modal -->
 <div class="modal-overlay" id="diaryModalOverlay"></div>
 <div>
   <div id="diaryDetailModal" class="modal">
@@ -49,7 +50,11 @@
       <span class="close">&times;</span>
       <h2>내가 작성한 일기</h2>
       <label for="modal_content"><span id="modal_feel"></span> </label>
-      <textarea rows="10" id="modal_content" name="modal_content" required></textarea>
+      <textarea rows="10" id="modal_content" name="modal_content" readonly></textarea>
+      <div class="ai-response">
+        <h3>AI 응답</h3>
+        <textarea rows="6" id="ai_response_content" readonly>AI가 생성한 응답</textarea>
+      </div>
     </div>
   </div>
 </div>

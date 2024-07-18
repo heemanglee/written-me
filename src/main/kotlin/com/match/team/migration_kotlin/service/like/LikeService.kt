@@ -2,11 +2,10 @@ package com.match.team.migration_kotlin.service.like
 
 import com.match.team.migration_kotlin.domain.like.Like
 import com.match.team.migration_kotlin.dto.like.CreateLikeResponseDto
-import com.match.team.migration_kotlin.repository.diray.DiaryRepository
+import com.match.team.migration_kotlin.repository.diary.DiaryRepository
 import com.match.team.migration_kotlin.repository.like.LikeRepository
 import com.match.team.migration_kotlin.util.findByIdOrThrow
 import lombok.RequiredArgsConstructor
-import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

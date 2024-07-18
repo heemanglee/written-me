@@ -1,6 +1,8 @@
-package com.match.team.migration_kotlin.repository.diray
+package com.match.team.migration_kotlin.repository.diary
 
 import com.match.team.migration_kotlin.domain.diary.QDiary.diary
+import com.match.team.migration_kotlin.domain.openai.QMessage
+import com.match.team.migration_kotlin.domain.openai.QMessage.message
 import com.match.team.migration_kotlin.domain.user.QUser
 import com.match.team.migration_kotlin.domain.user.User
 import com.match.team.migration_kotlin.dto.diary.GetDiaryDetailResponseDto
@@ -22,7 +24,7 @@ class DiaryRepositoryCustomImpl(
                     diary.id,
                     QUser.user.nickName,
                     diary.createdDate,
-                    diary.feelStatus
+                    diary.feelStatus,
                 )
             )
             .from(diary)
@@ -35,10 +37,12 @@ class DiaryRepositoryCustomImpl(
             .select(
                 Projections.constructor(
                     GetDiaryDetailResponseDto::class.java,
-                    diary.id, diary.content, diary.feelStatus
+                    diary.id, diary.content, diary.feelStatus,
+                    diary.message.content
                 )
             )
             .from(diary)
+            .join(message).on(diary.message.eq(message))
             .where(diary.id.eq(diaryId))
             .fetchOne()
     }

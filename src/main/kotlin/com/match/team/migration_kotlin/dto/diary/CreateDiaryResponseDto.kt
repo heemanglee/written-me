@@ -5,5 +5,6 @@ import com.match.team.migration_kotlin.domain.diary.FeelStatus
 data class CreateDiaryResponseDto (
     val diaryId: Long,
     val content: String,
-    val feel: FeelStatus
+    val feel: FeelStatus,
+    val aiResponse: String
 )

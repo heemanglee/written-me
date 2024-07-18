@@ -1,4 +1,4 @@
-package com.match.team.migration_kotlin.web.diray
+package com.match.team.migration_kotlin.web.diary
 
 import com.match.team.migration_kotlin.domain.user.User
 import com.match.team.migration_kotlin.service.diary.DiaryService

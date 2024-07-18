@@ -23,8 +23,9 @@ class DiaryController(
         @AuthenticationPrincipal user: User,
         request: CreateDiaryRequestDto
     ): String {
-        diaryService.createDiary(user, request)
-        return "redirect:/"
+        val result = diaryService.createDiary(user, request)
+        // 일기장 리스트 페이지로 이동함과 동시에 사용자가 작성한 일기 내용 모달을 보여준다.
+        return "redirect:/diarys?diaryId=${result.diaryId}"
     }
 
     @GetMapping("/{diaryId}")

@@ -1,4 +1,4 @@
-package com.match.team.migration_kotlin.repository.diray
+package com.match.team.migration_kotlin.repository.diary
 
 import com.match.team.migration_kotlin.domain.diary.Diary
 import org.springframework.data.jpa.repository.JpaRepository

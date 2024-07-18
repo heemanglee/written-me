@@ -56,6 +56,7 @@ class SecurityConfig(
                         .requestMatchers("/css/**", "/js/**")
                         .permitAll()
                         .requestMatchers("/diarys/**", "/users/profile/**").hasRole(Role.USER.name)
+                        .requestMatchers("/chats/**").hasRole(Role.USER.name)
                         .anyRequest().authenticated()
                 };
             }

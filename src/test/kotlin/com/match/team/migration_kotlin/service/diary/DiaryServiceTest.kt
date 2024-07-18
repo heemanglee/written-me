@@ -6,8 +6,11 @@ import com.match.team.migration_kotlin.domain.user.Role
 import com.match.team.migration_kotlin.domain.user.User
 import com.match.team.migration_kotlin.dto.diary.CreateDiaryRequestDto
 import com.match.team.migration_kotlin.dto.diary.GetDiaryResponseDto
-import com.match.team.migration_kotlin.repository.diray.DiaryRepository
+import com.match.team.migration_kotlin.repository.diary.DiaryRepository
+import com.match.team.migration_kotlin.repository.message.MessageRepository
+import com.match.team.migration_kotlin.service.message.MessageService
 import com.match.team.migration_kotlin.util.createDiary
+import com.match.team.migration_kotlin.util.createMessage
 import com.match.team.migration_kotlin.util.createUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -26,6 +29,12 @@ class DiaryServiceTest {
 
     @Mock
     lateinit var diaryRepository: DiaryRepository
+
+    @Mock
+    lateinit var messageService: MessageService
+
+    @Mock
+    lateinit var messageRepository: MessageRepository
 
     @InjectMocks
     lateinit var diaryService: DiaryService
@@ -48,7 +57,8 @@ class DiaryServiceTest {
         var diary2 = Diary(
             feelStatus = FeelStatus.BAD,
             user = user2,
-            content = "diary2"
+            content = "diary2",
+            message = createMessage()
         )
         val now = LocalDateTime.now()
         ReflectionTestUtils.setField(diary1, "createdDate", now)
@@ -82,19 +92,25 @@ class DiaryServiceTest {
         // given
         val user = createUser()
         val diary = createDiary(user)
-
-        val savedDiary = Diary(
-            feelStatus = diary.feelStatus,
-            user = user,
-            content = diary.content
-        )
-        ReflectionTestUtils.setField(savedDiary, "id", 1L)
+        val message = createMessage()
 
         val requestDto = CreateDiaryRequestDto(
             feel = diary.feelStatus.toString(),
             content = diary.content
         )
 
+        whenever(messageService.createAiResponse(requestDto.content)).thenReturn(message.content)
+
+        val savedDiary = Diary(
+            feelStatus = diary.feelStatus,
+            user = user,
+            content = diary.content,
+            message = message
+        )
+        ReflectionTestUtils.setField(savedDiary, "id", 1L)
+
+
+        whenever(messageRepository.save(any())).thenReturn(message)
         whenever(diaryRepository.save(any())).thenReturn(savedDiary)
 
         // when
@@ -105,5 +121,6 @@ class DiaryServiceTest {
         assertThat(result.diaryId).isEqualTo(savedDiary.id)
         assertThat(result.content).isEqualTo(savedDiary.content)
         assertThat(result.feel).isEqualTo(savedDiary.feelStatus)
+        assertThat(result.aiResponse).isEqualTo(message.content)
     }
 }
