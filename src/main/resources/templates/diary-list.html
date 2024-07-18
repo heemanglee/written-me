@@ -32,8 +32,11 @@
       <div class="mood" th:classappend="'mood-' + ${diary.feel}">
         <span th:text="${diary.feel}">Software Development</span>
       </div>
-      <div class="bookmark">
-        <button class="bookmark-btn">🩶</button>
+      <div class="like">
+        <button class="like-btn" th:data-index="${diary.diaryId}">
+          <span th:if="${diary.likeStatus}">❤️</span>
+          <span th:if="${diary.likeStatus == false}">🩶</span>
+        </button>
       </div>
     </div>
   </div>
@@ -41,7 +44,6 @@
 </div>
 
 
-<!-- modal -->
 <!-- modal -->
 <div class="modal-overlay" id="diaryModalOverlay"></div>
 <div>

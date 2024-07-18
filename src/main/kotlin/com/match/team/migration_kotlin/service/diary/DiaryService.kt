@@ -12,6 +12,7 @@ import com.match.team.migration_kotlin.repository.diary.DiaryRepository
 import com.match.team.migration_kotlin.repository.message.MessageRepository
 import com.match.team.migration_kotlin.service.message.MessageService
 import com.match.team.migration_kotlin.util.fail
+import com.match.team.migration_kotlin.util.findByIdOrThrow
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -51,5 +52,11 @@ class DiaryService(
         val diaryDetail =
             diaryRepository.findDiaryDetail(diaryId) ?: fail("일기를 조회할 수 없습니다. ID = ${diaryId}")
         return diaryDetail
+    }
+
+    @Transactional
+    fun updateDiaryLikeStatus(diaryId: Long) {
+        val findDiary = diaryRepository.findByIdOrThrow(diaryId)
+        findDiary.updateLikeStatus()
     }
 }

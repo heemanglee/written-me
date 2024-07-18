@@ -127,11 +127,11 @@ body {
   background-color: var(--mood-angry-bg);
 }
 
-.bookmark {
+.like {
   margin-left: 10px;
 }
 
-.bookmark-btn {
+.like-btn {
   border: none;
   background: none;
   font-size: 24px;

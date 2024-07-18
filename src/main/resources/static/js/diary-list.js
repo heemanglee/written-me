@@ -46,8 +46,7 @@ $(function () {
   });
 });
 
-
-$(document).ready(function() {
+$(document).ready(function () {
   const urlParams = new URLSearchParams(window.location.search);
   const diaryId = urlParams.get('diaryId');
   if (diaryId) {
@@ -93,3 +92,20 @@ $(document).ready(function() {
     $("body").css("overflow", "auto"); // 모달이 닫히면 스크롤을 복구
   });
 });
+
+$(function () {
+  $(".like-btn").click(function () {
+    let index = parseInt($(this).attr("data-index"))
+    alert(index)
+    $.ajax({
+      type: "PATCH",
+      url: `/diarys/${index}/like`,
+      success: function (data) {
+        location.href="/diarys"
+      },
+      error: function(err) {
+        alert("서버가 장애가 발생하였습니다.")
+      }
+    })
+  })
+})

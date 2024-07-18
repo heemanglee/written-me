@@ -1,7 +1,6 @@
 package com.match.team.migration_kotlin.repository.diary
 
 import com.match.team.migration_kotlin.domain.diary.QDiary.diary
-import com.match.team.migration_kotlin.domain.openai.QMessage
 import com.match.team.migration_kotlin.domain.openai.QMessage.message
 import com.match.team.migration_kotlin.domain.user.QUser
 import com.match.team.migration_kotlin.domain.user.User
@@ -25,6 +24,7 @@ class DiaryRepositoryCustomImpl(
                     QUser.user.nickName,
                     diary.createdDate,
                     diary.feelStatus,
+                    diary.isLike
                 )
             )
             .from(diary)

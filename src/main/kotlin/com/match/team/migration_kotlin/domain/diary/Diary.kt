@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "diarys")
 class Diary(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "diary_id")
+    @Column(name = "diarys_id")
     val id: Long? = null,
 
     @Enumerated(EnumType.STRING)
@@ -25,6 +26,9 @@ class Diary(
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "message_id")
     val message: Message,
+
+    @Column
+    var isLike: Boolean = false,
 
     var content: String
 ) : BaseEntity() {
@@ -44,5 +48,9 @@ class Diary(
                 content = content
             )
         }
+    }
+
+    fun updateLikeStatus() {
+        isLike = !isLike
     }
 }

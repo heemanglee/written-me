@@ -4,13 +4,11 @@ import com.match.team.migration_kotlin.domain.user.User
 import com.match.team.migration_kotlin.dto.diary.CreateDiaryRequestDto
 import com.match.team.migration_kotlin.dto.diary.GetDiaryDetailResponseDto
 import com.match.team.migration_kotlin.service.diary.DiaryService
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 
 @Controller
 @RequestMapping("/diarys")
@@ -35,5 +33,14 @@ class DiaryController(
     ): ResponseEntity<GetDiaryDetailResponseDto> {
         val diaryDetail = diaryService.getDiaryDetail(diaryId)
         return ResponseEntity.ok(diaryDetail)
+    }
+
+    @PatchMapping("/{diaryId}/like")
+    fun updateDiaryLikeStatus(
+        @AuthenticationPrincipal user: User,
+        @PathVariable diaryId: Long
+    ): ResponseEntity<Unit> {
+        diaryService.updateDiaryLikeStatus(diaryId)
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null)
     }
 }

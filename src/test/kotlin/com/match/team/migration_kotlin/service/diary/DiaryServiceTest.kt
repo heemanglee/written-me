@@ -68,7 +68,8 @@ class DiaryServiceTest {
             diaryId = diary1.id!!,
             nickName = user1.nickName,
             diaryDate = now,
-            feel = diary1.feelStatus
+            feel = diary1.feelStatus,
+            likeStatus = false
         )
         whenever(diaryRepository.findDiaryAll(user1)).thenReturn(listOf(responseDto))
 
