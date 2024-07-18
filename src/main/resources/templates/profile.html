@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>내 정보 게시판</title>
+  <link rel="stylesheet" href="/css/profile.css">
+  <link rel="stylesheet" href="/css/modal.css">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/navbar.html :: navbarFragment"></div>
+<div class="container">
+  <aside class="sidebar">
+    <ul>
+      <li><a href="/users/profile">정보 수정</a></li>
+      <li><a href="/diarys">내가 작성한 일기</a></li>
+      <li><a href="/profile/delete-account">회원 탈퇴</a></li>
+    </ul>
+  </aside>
+  <main class="main-content">
+    <div class="profile-form">
+      <h1>내 정보 수정</h1>
+      <form action="/profile/update" method="post">
+        <div class="form-group">
+          <label for="email">이메일</label>
+          <input type="email" id="email" name="email" th:value="${user.email}" readonly>
+        </div>
+        <div class="form-group nickname-group">
+          <label for="nickName">닉네임</label>
+          <div class="nickname-container">
+            <input type="text" id="nickName" name="nickName" th:placeholder="${user.nickName}">
+            <button id="nickName_edit_btn" type="button" class="nickname-edit-btn">수정</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="age">나이</label>
+          <input type="text" id="age" name="age" th:value="${user.age}" readonly>
+        </div>
+        <div class="form-group">
+          <label for="current_password">현재 비밀번호</label>
+          <input type="password" id="current_password" name="current_password"
+                 placeholder="현재 비밀번호를 입력해주세요.">
+        </div>
+        <div class="form-group">
+          <label for="new_password">새 비밀번호</label>
+          <input type="password" id="new_password" name="new_password"
+                 placeholder="새 비밀번호를 입력해주세요.">
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">새 비밀번호 확인</label>
+          <input type="password" id="confirm_password" name="confirm_password"
+                 placeholder="새 비밀번호를 한 번 더 입력해주세요.">
+        </div>
+        <div class="form-buttons">
+          <button type="submit" class="btn-submit" id="update_btn">수정</button>
+          <button type="button" class="btn-cancel" onclick="window.location.href='/'">취소
+          </button>
+        </div>
+      </form>
+      <button class="delete-account-btn">계정 삭제</button>
+    </div>
+  </main>
+</div>
+
+<!-- modal -->
+<div>
+  <div id="passwordModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>비밀번호 확인</h2>
+      <label for="modal_password">비밀번호</label>
+      <input type="password" id="modal_password" name="modal_password" required>
+      <button id="modal_btn" class="modal_btn-submit">확인</button>
+    </div>
+  </div>
+</div>
+
+</body>
+<script src="/js/profile.js"></script>
+<script src="/js/modal.js"></script>
+</html>

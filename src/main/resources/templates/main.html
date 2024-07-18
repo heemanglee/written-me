@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메인 페이지</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div th:replace="fragments/navbar.html :: navbarFragment"></div>
+<div class="hero-section">
+  <h1>오늘 하루를 돌아보며 일기를 작성해 보세요!</h1>
+  <p>Look back on your day and write a diary!</p>
+  <div class="boxes">
+    <div class="box" onclick="window.location.href='/diarys/form'">
+      <div class="icon">🚀</div>
+      <h2>오늘의 일기 작성하기</h2>
+      <p>Write today's entry</p>
+    </div>
+    <div class="box clickable" onclick="window.location.href='/diarys'">
+      <div class="icon">🔍</div>
+      <h2>지금까지 작성한 일기 확인하기</h2>
+      <p>Check your previous entries</p>
+    </div>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일기 작성 페이지</title>
+  <link rel="stylesheet" href="/css/diary-form.css">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/navbar.html :: navbarFragment"></div>
+<div class="container">
+  <div class="diary-container">
+    <h1>일기 작성</h1>
+    <form action="#" th:action="@{/diarys}" method="post">
+      <div class="form-group">
+        <label for="date">오늘의 날짜</label>
+        <span id="date" class="date-span" th:text="${date}"></span>
+      </div>
+      <div class="form-group">
+        <label>오늘의 기분</label>
+        <div class="moods">
+          <label>
+            <input type="radio" name="feel" value="HAPPY">
+            <span class="emoji">😊</span> 행복
+          </label>
+          <label>
+            <input type="radio" name="feel" value="GOOD">
+            <span class="emoji">🙂</span> 좋음
+          </label>
+          <label>
+            <input type="radio" name="feel" value="NOT_BAD">
+            <span class="emoji">😐</span> 보통
+          </label>
+          <label>
+            <input type="radio" name="feel" value="BAD">
+            <span class="emoji">😞</span> 나쁨
+          </label>
+          <label>
+            <input type="radio" name="feel" value="ANGRY">
+            <span class="emoji">😠</span> 화남
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="content">오늘의 일기</label>
+        <textarea id="content" name="content" rows="10" required></textarea>
+      </div>
+      <div class="buttons">
+        <button type="button" onclick="window.location.href='/'">취소하기</button>
+        <button id="diary_submit" type="submit">작성완료</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="/js/diary-form.js"></script>
+</body>
+</html>

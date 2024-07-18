@@ -1,0 +1,233 @@
+:root {
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --search-bar-bg: #ffcccc;
+  --search-bar-btn-bg: #ff6666;
+  --search-bar-btn-text: white;
+  --result-item-border: #ccc;
+  --result-item-bg: #fff;
+  --mood-happy-bg: #a3daff; /* 연한 하늘색 */
+  --mood-good-bg: #a3ffba; /* 연한 초록색 */
+  --mood-not-bad-bg: #fff8a3; /* 연한 노란색 */
+  --mood-bad-bg: #d3d3d3; /* 연한 회색 */
+  --mood-angry-bg: #ffb3b3; /* 연한 빨간색 */
+}
+
+.light-theme {
+  --background-color: #121212;
+  --text-color: #ddd;
+  --search-bar-bg: #333;
+  --search-bar-btn-bg: #444;
+  --search-bar-btn-text: #ddd;
+  --result-item-border: #555;
+  --result-item-bg: #222;
+  --mood-happy-bg: #527a95;
+  --mood-good-bg: #527a5c;
+  --mood-not-bad-bg: #7a7a52;
+  --mood-bad-bg: #595959;
+  --mood-angry-bg: #7a5252;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  padding-top: 60px; /* 네비게이션 바 높이만큼 패딩 추가 */
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--search-bar-bg);
+  margin-top: 20px; /* 네비게이션 바와 검색창 사이 간격 */
+}
+
+.search-bar input {
+  width: 400px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--search-bar-btn-bg);
+  color: var(--search-bar-btn-text);
+  cursor: pointer;
+}
+
+.results {
+  padding: 20px;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--result-item-border);
+  background-color: var(--result-item-bg);
+  margin-bottom: 20px; /* 두 데이터 간의 공간을 위해 마진 추가 */
+}
+
+.profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.details {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.time {
+  margin-left: 10px;
+  text-align: center;
+}
+
+.mood {
+  margin-left: 10px;
+}
+
+.mood span {
+  display: inline-block;
+  padding: 10px 20px; /* 상하 높이와 좌우 패딩을 키움 */
+  border-radius: 20px; /* 모서리를 더 둥글게 */
+  font-weight: bold;
+  font-size: 16px; /* 글자 크기 키움 */
+  color: var(--text-color); /* 텍스트 색상 */
+  width: 120px; /* 고정된 너비 설정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.mood-HAPPY {
+  background-color: var(--mood-happy-bg);
+}
+
+.mood-GOOD {
+  background-color: var(--mood-good-bg);
+}
+
+.mood-NOT_BAD {
+  background-color: var(--mood-not-bad-bg);
+}
+
+.mood-BAD {
+  background-color: var(--mood-bad-bg);
+}
+
+.mood-ANGRY {
+  background-color: var(--mood-angry-bg);
+}
+
+.bookmark {
+  margin-left: 10px;
+}
+
+.bookmark-btn {
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px); /* 뒷 배경을 흐리게 처리 */
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 700px;
+}
+
+.modal-content {
+  background-color: var(--result-item-bg); /* 모달 배경색 수정 */
+  padding: 30px; /* 패딩 조정 */
+  border: 1px solid var(--result-item-border);
+  border-radius: 20px; /* 모서리를 둥글게 */
+  color: var(--text-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  text-align: center;
+}
+
+.close {
+  color: var(--text-color);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #aaa;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-submit {
+  background-color: var(--search-bar-btn-bg);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-submit:hover {
+  background-color: var(--search-bar-btn-bg);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+textarea {
+  width: 95%; /* 너비를 95%로 설정 */
+  padding: 10px;
+  border: 1px solid var(--result-item-border);
+  border-radius: 10px;
+  font-size: 16px;
+  resize: none;
+  display: block; /* 블록 요소로 설정하여 중앙 정렬 */
+  margin: 20px auto; /* 위아래로 간격을 두고, 중앙 정렬 */
+}
+
+#modal_feel {
+  font-size: 20px;
+}
+
+.nickName button {
+  background-color: #f0f0f0; /* 버튼 배경색 */
+  border: 1px solid #ccc; /* 버튼 테두리 */
+  border-radius: 5px; /* 버튼 모서리 둥글게 */
+  padding: 5px 10px; /* 버튼 내부 여백 */
+  font-size: 16px; /* 버튼 글자 크기 */
+  cursor: pointer; /* 커서를 포인터로 변경 */
+  transition: background-color 0.3s; /* 배경색 전환 효과 */
+}
+
+.nickName button:hover {
+  background-color: #e0e0e0; /* 호버 시 배경색 */
+}

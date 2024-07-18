@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diary Search</title>
+  <link rel="stylesheet" href="/css/diary-list.css">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/navbar.html :: navbarFragment"></div>
+
+<div class="container">
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="5가지 기분을 필터링하여 검색">
+    <button id="search-btn">Search</button>
+  </div>
+
+  <div class="results">
+    <div class="result-item" th:each="diary, iterStat : ${diaryList}" th:data-index="${iterStat.index}">
+      <div class="profile">
+        <img th:src="@{/images/profile1.jpg}" alt="Profile Image">
+      </div>
+      <div class="details nickName" th:data-index="${iterStat.index}">
+        <span th:text="${diary.nickName}">닉네임</span>
+      </div>
+      <div class="time">
+        <p>
+          <span class="diary-date" th:text="${diary.diaryDate}">작성 시간</span>
+        </p>
+      </div>
+      <div class="mood" th:classappend="'mood-' + ${diary.feel}">
+        <span th:text="${diary.feel}">Software Development</span>
+      </div>
+      <div class="bookmark">
+        <button class="bookmark-btn" th:data-index="${iterStat.index}">🩶</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- modal -->
+<div class="modal-overlay" id="diaryModalOverlay"></div>
+<div>
+  <div id="diaryDetailModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>내가 작성한 일기</h2>
+      <label for="modal_content"><span id="modal_feel"></span> </label>
+      <textarea rows="10" id="modal_content" name="modal_content" required></textarea>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<script src="/js/diary-list.js"></script>
+<!-- JSON 형태로 diaryList 데이터를 페이지에 삽입 -->
+<script th:inline="javascript">
+  var diaryList = /*[[${diaryList}]]*/ '[]';
+</script>
+
+</html>

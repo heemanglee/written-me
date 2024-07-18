@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="navbarFragment">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/">WrittenMe</a>
+  </div>
+  <div class="nav-right">
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <span class="sun">☀️</span>
+      <span class="moon">🌙</span>
+    </div>
+    <button th:if="${user == null}" onclick="window.location.href='/users/sign-in'">로그인</button>
+    <button th:if="${user != null}" onclick="window.location.href='/users/sign-out'">로그아웃</button>
+    <button th:if="${user != null}" onclick="window.location.href='/users/profile'">내정보</button>
+  </div>
+</nav>
+</body>
+<script src="/js/navbar.js"></script>
+</html>

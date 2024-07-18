@@ -1,0 +1,51 @@
+.navbar {
+  background-color: var(--navbar-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navbar a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 10px;
+  margin-right: 40px;
+}
+
+.nav-right button {
+  padding: 10px 20px;
+  background-color: var(--button-bg-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.nav-right button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.theme-toggle .sun,
+.theme-toggle .moon {
+  font-size: 20px;
+  margin: 0 5px;
+}

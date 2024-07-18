@@ -1,0 +1,169 @@
+:root {
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --navbar-color: #fff;
+  --button-bg-color: #4CAF50;
+  --button-hover-bg-color: #45a049;
+  --form-bg-color: #fff;
+  --form-border-color: #ddd;
+  --form-border-radius: 10px;
+  --form-padding: 20px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background-color: var(--navbar-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 10px;
+  margin-right: 40px;
+}
+
+.nav-right button {
+  padding: 10px 20px;
+  background-color: var(--button-bg-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.nav-right button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.theme-toggle .sun,
+.theme-toggle .moon {
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.diary-container {
+  max-width: 800px;
+  padding: var(--form-padding);
+  background-color: var(--form-bg-color);
+  border: 1px solid var(--form-border-color);
+  border-radius: var(--form-border-radius);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  margin-top: -60px; /* Adjust to center vertically */
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.date-span {
+  display: block;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--form-border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.moods {
+  display: flex;
+  justify-content: space-between;
+}
+
+.moods label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emoji {
+  font-size: 2em;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.buttons button[type="button"] {
+  background-color: #f44336;
+  color: white;
+}
+
+.buttons button[type="button"]:hover {
+  background-color: #d32f2f;
+}
+
+.buttons button[type="submit"] {
+  background-color: var(--button-bg-color);
+  color: white;
+}
+
+.buttons button[type="submit"]:hover {
+  background-color: var(--button-hover-bg-color);
+}
