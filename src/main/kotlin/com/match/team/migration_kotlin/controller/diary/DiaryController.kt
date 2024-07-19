@@ -3,6 +3,7 @@ package com.match.team.migration_kotlin.controller.diary
 import com.match.team.migration_kotlin.domain.user.User
 import com.match.team.migration_kotlin.dto.diary.CreateDiaryRequestDto
 import com.match.team.migration_kotlin.dto.diary.GetDiaryDetailResponseDto
+import com.match.team.migration_kotlin.dto.diary.GetDiaryResponseDto
 import com.match.team.migration_kotlin.service.diary.DiaryService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
 @Controller
-@RequestMapping("/diarys")
+@RequestMapping("/api/diarys")
 class DiaryController(
     private val diaryService: DiaryService
 ) {
@@ -43,4 +44,14 @@ class DiaryController(
         diaryService.updateDiaryLikeStatus(diaryId)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null)
     }
+
+    @GetMapping
+    fun filterDiary(
+        @AuthenticationPrincipal user: User,
+        @RequestParam(required = false) feels: List<String>?
+    ): ResponseEntity<List<GetDiaryResponseDto>> {
+        val result = diaryService.getDiaryAll(user, feels)
+        return ResponseEntity.ok(result)
+    }
+
 }

@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 class UserController(
     private val userService: UserService,
 ) {

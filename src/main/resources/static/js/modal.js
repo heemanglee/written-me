@@ -26,7 +26,7 @@ $(function () {
 
     $.ajax({
       type: 'post',
-      url: `/users/profile/nickName`,
+      url: `/api/users/profile/nickName`,
       data: JSON.stringify({password: password, nickName: nickName}),
       contentType: "application/json",
       success: function (data) {
@@ -62,7 +62,7 @@ $(function () {
 
         $.ajax({
           type: "post",
-          url: "/uploads",
+          url: "/api/uploads",
           data: formData,
           processData: false, // 필수: jQuery가 데이터를 처리하지 않도록 설정
           contentType: false, // 필수: jQuery가 contentType을 설정하지 않도록 설정

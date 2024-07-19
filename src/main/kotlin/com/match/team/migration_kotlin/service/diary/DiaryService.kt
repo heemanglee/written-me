@@ -4,10 +4,7 @@ import com.match.team.migration_kotlin.domain.diary.Diary
 import com.match.team.migration_kotlin.domain.diary.FeelStatus
 import com.match.team.migration_kotlin.domain.openai.Message
 import com.match.team.migration_kotlin.domain.user.User
-import com.match.team.migration_kotlin.dto.diary.CreateDiaryRequestDto
-import com.match.team.migration_kotlin.dto.diary.CreateDiaryResponseDto
-import com.match.team.migration_kotlin.dto.diary.GetDiaryDetailResponseDto
-import com.match.team.migration_kotlin.dto.diary.GetDiaryResponseDto
+import com.match.team.migration_kotlin.dto.diary.*
 import com.match.team.migration_kotlin.repository.diary.DiaryRepository
 import com.match.team.migration_kotlin.repository.message.MessageRepository
 import com.match.team.migration_kotlin.service.message.MessageService
@@ -43,8 +40,10 @@ class DiaryService(
     }
 
     @Transactional(readOnly = true)
-    fun getDiaryAll(user: User): List<GetDiaryResponseDto> {
-        return diaryRepository.findDiaryAll(user)
+    fun getDiaryAll(user: User, feels: List<String>? = null): List<GetDiaryResponseDto> {
+        if(feels.isNullOrEmpty())
+            return diaryRepository.findDiaryAll(user)
+        return diaryRepository.findDiaryAll(user, feels)
     }
 
     @Transactional(readOnly = true)
@@ -59,4 +58,5 @@ class DiaryService(
         val findDiary = diaryRepository.findByIdOrThrow(diaryId)
         findDiary.updateLikeStatus()
     }
+
 }

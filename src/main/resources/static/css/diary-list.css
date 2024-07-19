@@ -1,7 +1,7 @@
 :root {
   --background-color: #f4f4f4;
   --text-color: #333;
-  --search-bar-bg: #ffcccc;
+  --search-bar-bg: #37c0b2;
   --search-bar-btn-bg: #ff6666;
   --search-bar-btn-text: white;
   --result-item-border: #ccc;
@@ -54,11 +54,11 @@ body {
   margin-right: 10px;
 }
 
-.search-bar button {
+#search-btn {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: var(--search-bar-btn-bg);
+  background-color: black;
   color: var(--search-bar-btn-text);
   cursor: pointer;
 }
@@ -231,3 +231,81 @@ textarea {
 .nickName button:hover {
   background-color: #e0e0e0; /* 호버 시 배경색 */
 }
+
+/* 기분 필터링 조건 */
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background: black;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  margin-right: 10px;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 10px;
+  width: 200px; /* 너비를 200px로 조정 */
+  padding-right: 40px; /* 오른쪽 패딩 추가 */
+}
+
+.dropdown-item {
+  color: black;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.dropdown-item input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0 10px 0 0;
+  font: inherit;
+  color: currentColor;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  display: grid;
+  place-content: center;
+}
+
+.dropdown-item input[type="checkbox"]:checked {
+  background-color: #000;
+}
+
+.dropdown-item input[type="checkbox"]:checked::before {
+  content: '✓';
+  color: #fff;
+}
+
+.apply-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background-color: transparent;
+  color: black;
+  padding: 10px;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+

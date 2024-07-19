@@ -15,7 +15,7 @@ $(function () {
 
     $.ajax({
       type: 'GET',
-      url: `/users/sign-up/check-email/${encodeURIComponent(input_email)}`, // URL 인코딩 추가
+      url: `/api/users/sign-up/check-email/${encodeURIComponent(input_email)}`, // URL 인코딩 추가
       success: function (data) {
         if (!data) {
           alert('사용 가능한 이메일입니다.');
@@ -48,7 +48,7 @@ $(function () {
 
     $.ajax({
       type: 'GET',
-      url: `/users/sign-up/check-password?password=${encodeURIComponent(
+      url: `/api/users/sign-up/check-password?password=${encodeURIComponent(
           password)}&confirmPassword=${encodeURIComponent(confirmPassword)}`,
       success: function (data) {
         if (data) {

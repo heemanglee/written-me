@@ -7,7 +7,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import java.time.LocalDate
 
 @Controller
@@ -28,9 +30,10 @@ class DiaryWebController(
     @GetMapping
     fun diaryListPage(
         @AuthenticationPrincipal user: User,
+        @RequestParam(required = false) feels: List<String>?,
         model: Model
     ): String {
-        val diaryList = diaryService.getDiaryAll(user)
+        val diaryList = diaryService.getDiaryAll(user, feels)
         model.addAttribute("user", user)
         model.addAttribute("diaryList", diaryList)
         return "diary-list"

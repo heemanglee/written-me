@@ -10,11 +10,36 @@
 <body>
 <div th:replace="fragments/navbar.html :: navbarFragment"></div>
 
-<div class="container">
-  <div class="search-bar">
-    <input type="text" id="search" placeholder="5가지 기분을 필터링하여 검색">
-    <button id="search-btn">Search</button>
+<div class="search-bar">
+  <div class="dropdown">
+    <button class="dropdown-toggle" id="toggle-btn" onclick="toggleDropdown()">선택</button>
+    <div class="dropdown-menu">
+      <label class="dropdown-item">
+        <input type="checkbox" onchange="updateLabel()" name="search-feel" value="HAPPY">
+        😊행복
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" onchange="updateLabel()" name="search-feel" value="GOOD">
+        🙂좋음
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" onchange="updateLabel()" name="search-feel" value="NOT_BAD">
+        😐보통
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" onchange="updateLabel()" name="search-feel" value="BAD">
+        😞나쁨
+      </label>
+      <label class="dropdown-item">
+        <input type="checkbox" onchange="updateLabel()" name="search-feel" value="ANGRY">
+        😠화남
+      </label>
+      <button class="apply-btn" onclick="applySelection()">적용</button>
+    </div>
   </div>
+  <button type="button" id="search-btn">검색</button>
+</div>
+
 
   <div class="results">
     <div class="result-item" th:each="diary : ${diaryList}" th:data-index="${diary.diaryId}">
@@ -30,7 +55,11 @@
         </p>
       </div>
       <div class="mood" th:classappend="'mood-' + ${diary.feel}">
-        <span th:text="${diary.feel}">Software Development</span>
+        <span th:if="${diary.feel.toString().equals('HAPPY')}" th:text="|😊 ${diary.feel}|">기분</span>
+        <span th:if="${diary.feel.toString().equals('GOOD')}" th:text="|🙂 ${diary.feel}|">기분</span>
+        <span th:if="${diary.feel.toString().equals('NOT_BAD')}" th:text="|😐 ${diary.feel}|">기분</span>
+        <span th:if="${diary.feel.toString().equals('BAD')}" th:text="|😞 ${diary.feel}|">기분</span>
+        <span th:if="${diary.feel.toString().equals('ANGRY')}" th:text="|😠 ${diary.feel}|">기분</span>
       </div>
       <div class="like">
         <button class="like-btn" th:data-index="${diary.diaryId}">

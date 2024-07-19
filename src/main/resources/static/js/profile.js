@@ -22,7 +22,7 @@ $(function () {
 
     $.ajax({
       type: "post",
-      url: `/users/profile/password`,
+      url: `/api/users/profile/password`,
       data: JSON.stringify({password: currentPassword}),
       contentType: "application/json",
       success: function (data) {
@@ -32,7 +32,7 @@ $(function () {
           if (newPassword === confirmPassword) {
             $.ajax({
               type: "patch",
-              url: `/users/profile/password`,
+              url: `/api/users/profile/password`,
               data: JSON.stringify({password: newPassword}),
               contentType: "application/json",
               success: function (data) {
@@ -61,7 +61,7 @@ $(function () {
 
     $.ajax({
       type: "delete",
-      url: `/users/profile`,
+      url: `/api/users/profile`,
       data: JSON.stringify({deleteImageName: proflileImageName}),
       contentType: "application/json",
       success: function(data) {

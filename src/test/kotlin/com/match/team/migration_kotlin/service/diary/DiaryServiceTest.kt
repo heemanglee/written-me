@@ -71,7 +71,7 @@ class DiaryServiceTest {
             feel = diary1.feelStatus,
             likeStatus = false
         )
-        whenever(diaryRepository.findDiaryAll(user1)).thenReturn(listOf(responseDto))
+        whenever(diaryRepository.findDiaryAll(user1, null)).thenReturn(listOf(responseDto))
 
         // when
         val diaryList = diaryService.getDiaryAll(user1)
