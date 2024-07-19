@@ -245,3 +245,80 @@ input[readonly] {
 .btn-submit:hover {
   background-color: var(--button-hover-bg-color);
 }
+
+/* 프로필 이미지 컨테이너 스타일 */
+.profile-image-container {
+  display: flex;
+  flex-direction: column; /* 열 방향으로 정렬 */
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px; /* 버튼 간의 간격 추가 */
+}
+
+/* 프로필 이미지 스타일 */
+.profile-image-container img {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px; /* 이미지와 버튼 간의 간격 */
+}
+
+/* 파일 입력 숨기기 */
+.profile-image-container input[type="file"] {
+  display: none;
+}
+
+/* 버튼 스타일 */
+.profile-image-container button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* 이미지 편집 버튼 색상 */
+.profile-image-container button#profileImageEditBtn {
+  background-color: #008CBA; /* 파란색 */
+}
+
+/* 이미지 삭제 버튼 색상 */
+.profile-image-container button#profileImageRemoveBtn {
+  background-color: #ff0000; /* 빨간색 */
+}
+
+/* 모달 버튼 스타일 */
+.modal_btn_submit {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.profileImageRemoveBtn {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}

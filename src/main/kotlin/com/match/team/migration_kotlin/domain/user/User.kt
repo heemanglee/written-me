@@ -1,6 +1,7 @@
 package com.match.team.migration_kotlin.domain.user
 
 import com.match.team.migration_kotlin.common.BaseEntity
+import com.match.team.migration_kotlin.domain.file.UploadFile
 import com.match.team.migration_kotlin.dto.user.CreateUserRequestDto
 import jakarta.persistence.*
 import lombok.AccessLevel
@@ -21,6 +22,10 @@ class User(
 
     @Enumerated(EnumType.STRING)
     val role: Role,
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_image_id")
+    var profileImage: UploadFile? = null,
 
     var nickName: String,
     var password: String,
@@ -57,5 +62,9 @@ class User(
         password: String
     ) {
         this.password = passwordEncoder.encode(password)
+    }
+
+    fun updateImagePath(uploadFile: UploadFile?) {
+        this.profileImage = uploadFile
     }
 }

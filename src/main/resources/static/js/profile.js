@@ -23,7 +23,7 @@ $(function () {
     $.ajax({
       type: "post",
       url: `/users/profile/password`,
-      data: JSON.stringify({ password: currentPassword }),
+      data: JSON.stringify({password: currentPassword}),
       contentType: "application/json",
       success: function (data) {
         if (!data) {
@@ -33,7 +33,7 @@ $(function () {
             $.ajax({
               type: "patch",
               url: `/users/profile/password`,
-              data: JSON.stringify({ password: newPassword }),
+              data: JSON.stringify({password: newPassword}),
               contentType: "application/json",
               success: function (data) {
                 alert("비밀번호가 정상적으로 변경되었습니다.");
@@ -54,4 +54,23 @@ $(function () {
       }
     });
   });
+
+  $("#profileImageRemoveBtn").click(function () {
+    // let profileImage = $("#profile_image").attr("src");
+    let proflileImageName = $("#profileImageName").val()
+
+    $.ajax({
+      type: "delete",
+      url: `/users/profile`,
+      data: JSON.stringify({deleteImageName: proflileImageName}),
+      contentType: "application/json",
+      success: function(data) {
+        alert("이미지 정상적으로 삭제되었습니다.")
+        window.location.href= "/users/profile"
+      },
+      fail: function(err) {
+        alert("이미지 삭제 중 오류가 발생했습니다.")
+      }
+    })
+  })
 });

@@ -11,12 +11,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        format_sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
 
 openai:
   model: "gpt-3.5-turbo"
   api:
     key: ${OPEN_API_KEY}
     url: "https://api.openai.com/v1/chat/completions"
+
+file:
+  dir: ${absolute_dir}

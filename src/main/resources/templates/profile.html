@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>내 정보 게시판</title>
   <link rel="stylesheet" href="/css/profile.css">
-  <link rel="stylesheet" href="/css/modal.css">
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
@@ -22,6 +21,22 @@
     <div class="profile-form">
       <h1>내 정보 수정</h1>
       <form action="/profile/update" method="post">
+        <div class="form-group">
+          <label for="profile_image"></label>
+          <div class="profile-image-container">
+            <!-- user.uploadImageName가 null일 경우 기본 이미지 사용 -->
+            <img id="profile_image" th:src="${user.uploadImageName != null ? '/thumbnails/' + user.uploadImageName : '/images/default_user_img.png'}">
+            <input type="file" id="profileImageInput" name="profileImage" accept="image/*">
+            <div class="button-container">
+              <button type="button" id="profileImageEditBtn">이미지 수정</button>
+              <button type="button" th:if="${user.uploadImageName != null}"
+                      id="profileImageRemoveBtn">이미지 삭제
+              </button>
+              <input type="hidden" id="profileImageName" th:value="${user.uploadImageName}"/>
+            </div>
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="email">이메일</label>
           <input type="email" id="email" name="email" th:value="${user.email}" readonly>
@@ -73,6 +88,16 @@
       <input type="password" id="modal_password" name="modal_password" required>
       <button id="modal_btn" class="modal_btn-submit">확인</button>
     </div>
+  </div>
+</div>
+
+<!-- 이미지 업로드 -->
+<div id="imageModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>이미지 업로드</h2>
+    <input type="file" id="modalProfileImageInput" name="modalProfileImage" accept="image/*">
+    <button id="modalUploadBtn" type="button" class="modal_btn_submit">수정</button>
   </div>
 </div>
 

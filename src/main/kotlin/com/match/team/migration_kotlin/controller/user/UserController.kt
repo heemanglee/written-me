@@ -74,12 +74,13 @@ class UserController(
         return ResponseEntity.ok(null)
     }
 
-    @PatchMapping("/profile/thumbnail")
-    fun updateThumbnail(
+    @DeleteMapping("/profile")
+    fun deleteProfileImage(
         @AuthenticationPrincipal user: User,
-        @RequestParam("file") multipartFile: MultipartFile
-    ) {
-
+        @RequestBody request: DeleteProfileImageRequestDto
+    ): ResponseEntity<String> {
+        userService.deleteProfileImage(user, request)
+        return ResponseEntity.ok("success")
     }
 
 }

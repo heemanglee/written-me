@@ -34,6 +34,8 @@ class SecurityConfig(
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
+            .httpBasic()
+            .and()
             .csrf { csrfConfig ->
                 run {
                     csrfConfig.disable()
@@ -57,6 +59,7 @@ class SecurityConfig(
                         .permitAll()
                         .requestMatchers("/diarys/**", "/users/profile/**").hasRole(Role.USER.name)
                         .requestMatchers("/chats/**").hasRole(Role.USER.name)
+                        .requestMatchers("/uploads/**").hasRole(Role.USER.name)
                         .anyRequest().authenticated()
                 };
             }

@@ -19,7 +19,7 @@
   <div class="results">
     <div class="result-item" th:each="diary : ${diaryList}" th:data-index="${diary.diaryId}">
       <div class="profile">
-        <img th:src="@{/images/profile1.jpg}" alt="Profile Image">
+        <img th:src="@{user.imagePath}" alt="Profile Image">
       </div>
       <div class="details nickName" th:data-index="${diary.diaryId}">
         <span th:text="${diary.nickName}">닉네임</span>
