@@ -31,7 +31,7 @@ class DiaryRepositoryCustomImpl(
             )
             .from(diary)
             .join(QUser.user).on(diary.user.eq(QUser.user))
-            .where(filterByFeels(feels))
+            .where(filterByFeels(feels), eqUser(user))
             .fetch()
     }
 
@@ -54,6 +54,10 @@ class DiaryRepositoryCustomImpl(
         return feels?.let {
             diary.feelStatus.`in`(feels.map { FeelStatus.valueOf(it) })
         }
+    }
+
+    private fun eqUser(user: User): BooleanExpression {
+        return diary.user.eq(user)
     }
 
 }
