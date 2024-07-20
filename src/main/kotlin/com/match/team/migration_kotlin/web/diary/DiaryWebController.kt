@@ -36,6 +36,7 @@ class DiaryWebController(
         val diaryList = diaryService.getDiaryAll(user, feels)
         model.addAttribute("user", user)
         model.addAttribute("diaryList", diaryList)
+        println(user.profileImage?.uploadFileName)
         return "diary-list"
     }
 }
