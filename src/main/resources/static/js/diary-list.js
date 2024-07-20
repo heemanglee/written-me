@@ -241,3 +241,24 @@ window.onclick = function (event) {
   }
 }
 
+// 날짜 포매팅 함수, LocalDateTime -> "yyyy년 MM월 dd일"
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+  const day = date.getDate();
+  return `${year}년 ${month}월 ${day}일`;
+}
+
+// 페이지 로드 시 실행되는 함수
+document.addEventListener("DOMContentLoaded", function() {
+  // 모든 날짜 요소 선택
+  const dateElements = document.querySelectorAll('.diary-date');
+
+  // 각 날짜 요소에 대해 포매팅 수행
+  dateElements.forEach(function(element) {
+    const dateString = element.textContent;
+    const formattedDate = formatDate(dateString);
+    element.textContent = formattedDate;
+  });
+});
