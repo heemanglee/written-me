@@ -1,5 +1,5 @@
 .navbar {
-  background-color: var(--navbar-color);
+  background-color: white;
   color: var(--text-color);
   display: flex;
   justify-content: space-between;
@@ -26,7 +26,7 @@
 
 .nav-right button {
   padding: 10px 20px;
-  background-color: var(--button-bg-color);
+  background-color: white;
   color: var(--text-color);
   border: none;
   border-radius: 4px;
@@ -35,7 +35,7 @@
 }
 
 .nav-right button:hover {
-  background-color: var(--button-hover-bg-color);
+  background-color: #e5e3e3;
 }
 
 .theme-toggle {
