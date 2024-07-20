@@ -20,9 +20,8 @@ function getEmoji(feel) {
 }
 
 $(function () {
-  $(".nickName").click(function () {
+  $(".content-summary").click(function () {
     let index = parseInt($(this).attr("data-index"))
-    // let diary = diaryList[index]
 
     $.ajax({
       type: "get",

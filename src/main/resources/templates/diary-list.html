@@ -49,6 +49,9 @@
       <div class="details nickName" th:data-index="${diary.diaryId}">
         <span th:text="${diary.nickName}">닉네임</span>
       </div>
+      <div class="content-summary" th:data-index="${diary.diaryId}">
+        <span>AI 응답 요약본</span>
+      </div>
       <div class="time">
         <p>
           <span class="diary-date" th:text="${diary.diaryDate}">작성 시간</span>
@@ -69,8 +72,6 @@
       </div>
     </div>
   </div>
-
-</div>
 
 
 <!-- modal -->

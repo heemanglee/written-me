@@ -82,21 +82,41 @@ body {
   border-radius: 50%;
 }
 
+.result-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--result-item-border);
+  background-color: var(--result-item-bg);
+  margin-bottom: 20px;
+}
+
 .details {
-  flex: 1;
   margin-left: 10px;
+  flex: 0 1 auto;
+}
+
+.content-summary {
+  flex: 1; /* 중간에 위치하게 하기 위해 flex-grow를 사용 */
+  margin: 0 10px; /* 좌우 간격 설정 */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
 }
 
 .time {
   margin-left: 10px;
   text-align: center;
+  flex: 0 1 auto;
 }
 
 .mood {
   margin-left: 10px;
 }
 
-.mood span {
+.mood {
   display: inline-block;
   padding: 10px 20px; /* 상하 높이와 좌우 패딩을 키움 */
   border-radius: 20px; /* 모서리를 더 둥글게 */
@@ -233,7 +253,6 @@ textarea {
 }
 
 /* 기분 필터링 조건 */
-/* styles.css */
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
