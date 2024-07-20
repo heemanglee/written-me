@@ -103,7 +103,9 @@ body {
   align-items: center;
   display: flex;
   text-decoration-line: underline;
-  text-decoration-style: wavy;
+  text-underline-position: under;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .time {
