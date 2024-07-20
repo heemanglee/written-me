@@ -36,7 +36,7 @@ class DiaryService(
         val diary = Diary.from(user, FeelStatus.valueOf(request.feel), savedMessage, request.content)
         val result = diaryRepository.save(diary)
 
-        return CreateDiaryResponseDto(result.id!!, result.content, result.feelStatus, message.content)
+        return CreateDiaryResponseDto(result.id!!, result.content, result.feelStatus, message.content, message.summary)
     }
 
     @Transactional(readOnly = true)

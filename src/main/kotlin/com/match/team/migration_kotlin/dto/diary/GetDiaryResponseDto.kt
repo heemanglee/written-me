@@ -8,5 +8,6 @@ data class GetDiaryResponseDto(
     val nickName: String,
     val diaryDate: LocalDateTime,
     val feel: FeelStatus,
-    val likeStatus: Boolean
+    val likeStatus: Boolean,
+    val aiResponseSummary: String
 )

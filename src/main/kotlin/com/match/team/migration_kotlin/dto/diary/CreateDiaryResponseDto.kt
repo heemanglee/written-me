@@ -6,5 +6,6 @@ data class CreateDiaryResponseDto (
     val diaryId: Long,
     val content: String,
     val feel: FeelStatus,
-    val aiResponse: String
+    val aiResponse: String,
+    val aiResponseSummary: String
 )
