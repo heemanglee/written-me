@@ -1,4 +1,20 @@
 :root {
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --navbar-color: #fff;
+  --sidebar-color: #f8f9fa;
+  --button-bg-color: #4CAF50;
+  --button-hover-bg-color: #45a049;
+  --form-border-radius: 10px;
+  --form-bg-color: #fff;
+  --form-border-color: #ddd;
+  --box-background-color: #121212;
+  --form-padding: 20px;
+  --box-text-color: #fff;
+  --readonly-bg-color: #e9ecef;
+}
+
+.black-theme {
   --background-color: #121212;
   --text-color: white;
   --navbar-color: #333;
@@ -12,20 +28,6 @@
   --box-background-color: #fff;
   --box-text-color: #000;
   --readonly-bg-color: #3a3a3a;
-}
-
-.light-theme {
-  --background-color: #f4f4f4;
-  --text-color: #333;
-  --navbar-color: #fff;
-  --sidebar-color: #f8f9fa;
-  --button-bg-color: #4CAF50;
-  --button-hover-bg-color: #45a049;
-  --form-bg-color: #fff;
-  --form-border-color: #ddd;
-  --box-background-color: #121212;
-  --box-text-color: #fff;
-  --readonly-bg-color: #e9ecef;
 }
 
 body {
@@ -80,7 +82,7 @@ body {
   padding: var(--form-padding);
   border-radius: var(--form-border-radius);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 400px; /* 폼의 너비를 줄여서 중앙에 위치하도록 */
+  width: 700px; /* 폼의 너비를 줄여서 중앙에 위치하도록 */
 }
 
 .profile-form h1 {

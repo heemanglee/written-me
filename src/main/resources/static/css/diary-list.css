@@ -1,5 +1,5 @@
 :root {
-  --background-color: #f4f4f4;
+  --background-color: #fff;
   --text-color: #333;
   --search-bar-bg: #37c0b2;
   --search-bar-btn-bg: #ff6666;
@@ -13,7 +13,7 @@
   --mood-angry-bg: #ffb3b3; /* 연한 빨간색 */
 }
 
-.light-theme {
+.dark-theme {
   --background-color: #121212;
   --text-color: #ddd;
   --search-bar-bg: #333;
@@ -43,6 +43,7 @@ body {
   align-items: center;
   padding: 20px;
   background-color: var(--search-bar-bg);
+  margin: 20px;
   margin-top: 20px; /* 네비게이션 바와 검색창 사이 간격 */
 }
 
@@ -257,7 +258,6 @@ textarea {
 /* 기분 필터링 조건 */
 body {
   font-family: Arial, sans-serif;
-  margin: 20px;
 }
 
 .dropdown {

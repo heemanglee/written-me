@@ -1,14 +1,4 @@
 :root {
-  --background-color: #121212;
-  --text-color: white;
-  --navbar-color: #333;
-  --button-bg-color: #4CAF50;
-  --button-hover-bg-color: #45a049;
-  --box-background-color: #fff;
-  --box-text-color: #000;
-}
-
-.light-theme {
   --background-color: #f4f4f4;
   --text-color: black;
   --navbar-color: #fff;
@@ -17,6 +7,16 @@
   --box-background-color: #121212;
   --box-text-color: #fff;
 }
+
+/*.black-theme {*/
+/*  --background-color: #121212;*/
+/*  --text-color: white;*/
+/*  --navbar-color: #333;*/
+/*  --button-bg-color: #4CAF50;*/
+/*  --button-hover-bg-color: #45a049;*/
+/*  --box-background-color: #fff;*/
+/*  --box-text-color: #000;*/
+/*}*/
 
 body {
   font-family: Arial, sans-serif;

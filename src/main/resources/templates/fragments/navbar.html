@@ -11,10 +11,10 @@
     <a href="/">WrittenMe</a>
   </div>
   <div class="nav-right">
-    <div class="theme-toggle" onclick="toggleTheme()">
-      <span class="sun">☀️</span>
-      <span class="moon">🌙</span>
-    </div>
+<!--    <div class="theme-toggle" onclick="toggleTheme()">-->
+<!--      <span class="sun">☀️</span>-->
+<!--      <span class="moon">🌙</span>-->
+<!--    </div>-->
     <button th:if="${user == null}" onclick="window.location.href='/users/sign-in'">로그인</button>
     <button th:if="${user != null}" onclick="window.location.href='/users/sign-out'">로그아웃</button>
     <button th:if="${user != null}" onclick="window.location.href='/users/profile'">내정보</button>
