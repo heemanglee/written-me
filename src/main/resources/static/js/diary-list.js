@@ -306,3 +306,96 @@ $(function() {
     })
   })
 })
+
+// 모달 닫기 버튼
+document.getElementsByClassName('closeInviteModal')[0].addEventListener('click', function() {
+  document.getElementById('inviteModal').style.display = 'none';
+});
+
+// 바깥 클릭으로 모달 닫기
+window.addEventListener('click', function(event) {
+  if (event.target == document.getElementById('inviteModal')) {
+    document.getElementById('inviteModal').style.display = 'none';
+  }
+});
+
+// 초대 링크 복사 버튼
+$(function ()  {
+  $("#copyBtn").click(function() {
+    var inviteLink = $("#create-inviteLink").val()
+    navigator.clipboard.writeText(inviteLink).then(() => {
+      alert("초대코드가 복사되었습니다.")
+    })
+  })
+})
+
+document.addEventListener('DOMContentLoaded', function() {
+  const calendarOpenBtn = document.getElementById('calendar-open-btn');
+  const calendarContainer = document.getElementById('calendar-container');
+  const currentMonthElem = document.getElementById('current-month');
+  const calendarDaysElem = document.getElementById('calendar-days');
+  const calendarDatesElem = document.getElementById('calendar-dates');
+  const prevMonthBtn = document.getElementById('prev-month-btn');
+  const nextMonthBtn = document.getElementById('next-month-btn');
+
+  let currentDate = new Date();
+  let commitDates = [1, 5, 10, 15, 20, 25]; // 커밋이 있는 날짜 (예시)
+
+  function renderCalendar(date) {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    currentMonthElem.textContent = `${year}년 ${month + 1}월`;
+
+    calendarDaysElem.innerHTML = '';
+    calendarDatesElem.innerHTML = '';
+
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const totalDays = lastDay.getDate();
+    const startDay = firstDay.getDay();
+
+    // 요일 추가
+    ['일', '월', '화', '수', '목', '금', '토'].forEach(day => {
+      const dayElem = document.createElement('div');
+      dayElem.textContent = day;
+      calendarDaysElem.appendChild(dayElem);
+    });
+
+    // 날짜 추가
+    for (let i = 0; i < startDay; i++) {
+      calendarDatesElem.appendChild(document.createElement('div'));
+    }
+
+    for (let day = 1; day <= totalDays; day++) {
+      const dateElem = document.createElement('div');
+      dateElem.textContent = day;
+
+      if (commitDates.includes(day)) {
+        dateElem.classList.add('commit-day');
+      }
+
+      calendarDatesElem.appendChild(dateElem);
+    }
+  }
+
+  calendarOpenBtn.addEventListener('click', function() {
+    calendarContainer.classList.toggle('hidden');
+    renderCalendar(currentDate);
+    document.body.classList.add('no-scroll'); // 스크롤 방지
+  });
+
+  prevMonthBtn.addEventListener('click', function() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar(currentDate);
+  });
+
+  nextMonthBtn.addEventListener('click', function() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar(currentDate);
+  });
+});
+
+document.getElementById('close-btn').addEventListener('click', function() {
+  document.getElementById('calendar-container').classList.add('hidden');
+  document.body.classList.remove('no-scroll'); // 스크롤 복구
+});

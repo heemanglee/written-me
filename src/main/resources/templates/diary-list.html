@@ -11,34 +11,39 @@
 <div th:replace="fragments/navbar.html :: navbarFragment"></div>
 
 <div class="search-bar">
-  <div class="dropdown">
-    <button class="dropdown-toggle" id="toggle-btn" onclick="toggleDropdown()">선택</button>
-    <div class="dropdown-menu">
-      <label class="dropdown-item">
-        <input type="checkbox" onchange="updateLabel()" name="search-feel" value="HAPPY">
-        😊행복
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" onchange="updateLabel()" name="search-feel" value="GOOD">
-        🙂좋음
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" onchange="updateLabel()" name="search-feel" value="NOT_BAD">
-        😐보통
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" onchange="updateLabel()" name="search-feel" value="BAD">
-        😞나쁨
-      </label>
-      <label class="dropdown-item">
-        <input type="checkbox" onchange="updateLabel()" name="search-feel" value="ANGRY">
-        😠화남
-      </label>
-      <button class="apply-btn" onclick="applySelection()">적용</button>
+  <div class="left-buttons">
+    <div class="dropdown">
+      <button class="dropdown-toggle" id="toggle-btn" onclick="toggleDropdown()">선택</button>
+      <div class="dropdown-menu">
+        <label class="dropdown-item">
+          <input type="checkbox" onchange="updateLabel()" name="search-feel" value="HAPPY">
+          😊행복
+        </label>
+        <label class="dropdown-item">
+          <input type="checkbox" onchange="updateLabel()" name="search-feel" value="GOOD">
+          🙂좋음
+        </label>
+        <label class="dropdown-item">
+          <input type="checkbox" onchange="updateLabel()" name="search-feel" value="NOT_BAD">
+          😐보통
+        </label>
+        <label class="dropdown-item">
+          <input type="checkbox" onchange="updateLabel()" name="search-feel" value="BAD">
+          😞나쁨
+        </label>
+        <label class="dropdown-item">
+          <input type="checkbox" onchange="updateLabel()" name="search-feel" value="ANGRY">
+          😠화남
+        </label>
+        <button class="apply-btn" onclick="applySelection()">적용</button>
+      </div>
     </div>
+    <button type="button" id="search-btn">검색</button>
   </div>
-  <button type="button" id="search-btn">검색</button>
-  <button type="button" id="couple_submit_btn">커플 등록</button>
+  <div class="right-buttons">
+    <button type="button" id="calendar-open-btn">달력 열기</button>
+    <button type="button" id="couple_submit_btn">커플 등록</button>
+  </div>
 </div>
 
 
@@ -117,10 +122,27 @@
   </div>
 </div>
 
+<div id="calendar-container" class="hidden">
+  <button id="close-btn" class="calendar-close-btn">&times;</button>
+  <div id="calendar-header">
+    <button id="prev-month-btn">&lt;</button>
+    <span id="current-month"></span>
+    <button id="next-month-btn">&gt;</button>
+  </div>
+  <div id="calendar-body">
+    <div id="calendar-days">
+      <!-- 요일 -->
+    </div>
+    <div id="calendar-dates">
+      <!-- 날짜 -->
+    </div>
+  </div>
+</div>
+
 </body>
 
 <script src="/js/diary-list.js"></script>
-<script src="/js/couple_modal.js"></script>
+<!--<script src="/js/couple_modal.js"></script>-->
 <!-- JSON 형태로 diaryList 데이터를 페이지에 삽입 -->
 <script th:inline="javascript">
   var diaryList = /*[[${diaryList}]]*/ '[]';

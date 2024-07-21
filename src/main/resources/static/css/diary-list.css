@@ -39,12 +39,28 @@ body {
 
 .search-bar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 20px;
   background-color: var(--search-bar-bg);
   margin: 20px;
-  margin-top: 20px; /* 네비게이션 바와 검색창 사이 간격 */
+  margin-top: 20px;
+}
+
+.search-bar .left-buttons {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-bar .right-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar button {
+  margin-left: 10px; /* 버튼 사이 간격 추가 */
 }
 
 .search-bar input {
@@ -330,12 +346,12 @@ body {
 }
 
 #couple_submit_btn {
-  margin-left: auto;
+  /*margin-left: auto;*/
   color: white;
   background-color: #ee6e6e; /* 버튼 배경색 */
   border: 1px solid #ee6e6e; /* 버튼 테두리 */
   border-radius: 5px; /* 버튼 모서리 둥글게 */
-  padding: 5px 10px; /* 버튼 내부 여백 */
+  padding: 10px 20px; /* 버튼 내부 여백 */
   font-size: 16px; /* 버튼 글자 크기 */
   cursor: pointer; /* 커서를 포인터로 변경 */
   transition: background-color 0.3s; /* 배경색 전환 효과 */
@@ -426,4 +442,93 @@ body {
 
 #enrollBtn:hover {
   background-color: #0056b3;
+}
+
+#calendar-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; /* 가로 길이 확대 */
+  padding: 60px; /* 패딩 확대 */
+  border: 2px solid #ccc; /* 테두리 확대 */
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* 그림자 확대 */
+  z-index: 1000; /* 모달이 다른 요소 위에 나타나도록 */
+  overflow: auto;
+}
+
+.calendar-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 24px; /* 버튼 크기 */
+  cursor: pointer;
+  color: #000;
+  transition: color 0.3s ease;
+  margin-bottom: 30px;
+}
+
+.calendar-close-btn:hover {
+  color: #ff0000; /* 호버 시 버튼 색상 변화 */
+}
+
+.hidden {
+  display: none;
+}
+
+#calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* 마진 확대 */
+}
+
+#calendar-days {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px; /* 마진 확대 */
+}
+
+#calendar-days div {
+  width: 14.28%;
+  text-align: center;
+  font-weight: bold;
+}
+
+#calendar-dates {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#calendar-dates div {
+  width: 14.28%;
+  text-align: center;
+  padding: 10px; /* 패딩 확대 */
+  box-sizing: border-box;
+}
+
+#calendar-dates .commit-day {
+  background-color: #4caf50;
+  color: white;
+}
+
+body.no-scroll {
+  overflow: hidden; /* 스크롤 방지 */
+}
+
+#calendar-open-btn {
+  background-color: #f0f0f0; /* 버튼 배경색 */
+  border: 1px solid #ccc; /* 버튼 테두리 */
+  border-radius: 5px; /* 모서리 둥글게 */
+  padding: 10px 20px; /* 버튼 내부 여백 */
+  font-size: 16px; /* 글자 크기 */
+  cursor: pointer; /* 커서를 포인터로 변경 */
+  transition: background-color 0.3s; /* 배경색 전환 효과 */
+}
+
+#calendar-open-btn:hover {
+  background-color: #e0e0e0; /* 호버 시 배경색 */
 }
