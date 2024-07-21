@@ -21,6 +21,13 @@ class CoupleConnectionService(
 
     fun createToken(user: User): CreateConnectionTokenResponseDto {
         validateIsCouple(user.id!!)
+
+        // 이미 사용자에게 발생한 토큰이 있다면 해당 토큰을 반환한다.
+        val isPreviousGeneratorToken = isPreviousGeneratorTokenToUser(user)
+        if(isPreviousGeneratorToken != null) {
+            return CreateConnectionTokenResponseDto(isPreviousGeneratorToken.connectionToken)
+        }
+
         val token = tokenGenerator.generateToken() // 연결을 위한 토큰 생성
         val createConnection = CoupleConnection.createConnection(user.id!!, token) // 연결 생성
         coupleConnectionRepository.save(createConnection)
@@ -35,6 +42,11 @@ class CoupleConnectionService(
         println("token=${findToken}, ${token}")
         val findConnection = coupleConnectionRepository.findByIdOrThrow(findToken)
         return GetConnectionResponseDto(findConnection.userId.toLong())
+    }
+
+    fun isPreviousGeneratorTokenToUser(user: User): CoupleConnection? {
+        val coupleConnection = coupleConnectionRepository.findByUserId(user.id.toString())
+        return coupleConnection
     }
 
     private fun extractToken(token: String): String {

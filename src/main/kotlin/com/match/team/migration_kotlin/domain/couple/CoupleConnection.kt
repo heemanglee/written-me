@@ -3,12 +3,14 @@ package com.match.team.migration_kotlin.domain.couple
 import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash
 import org.springframework.data.redis.core.TimeToLive
+import org.springframework.data.redis.core.index.Indexed
 
 @RedisHash("CoupleConnection")
 class CoupleConnection(
     @Id
     val connectionToken: String, // 연결 토큰
 
+    @Indexed
     val userId: String, // 사용자 ID
 
     @TimeToLive

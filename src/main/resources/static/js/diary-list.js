@@ -295,11 +295,11 @@ $(function() {
           data: JSON.stringify({senderId: senderId}),
           contentType: "application/json",
           success: function(data) {
-            alert("연인 등록이 완료되었습니다!")
+            alert("커플 등록이 완료되었습니다!")
             location.href="/diarys"
           },
           error: function(err) {
-            alert("연인 등록에 실패하였습니다.")
+            alert("커플 등록에 실패하였습니다.")
           }
         })
       }
