@@ -350,3 +350,46 @@ input[readonly] {
   cursor: pointer;
   border-radius: 5px;
 }
+
+.modal-content label {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #999999;
+  cursor: pointer;
+  height: 20px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.modal-content input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+.modal-content .upload-name {
+  display: inline-block;
+  height: 40px;
+  padding: 0 10px;
+  vertical-align: middle;
+  border: 1px solid #dddddd;
+  width: 50%;
+  color: #999999;
+}
+
+#modalUploadBtn {
+  /* 수정 버튼 스타일 */
+  padding: 11px 20px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  /*border-radius: 4px;*/
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+}

@@ -110,4 +110,9 @@ $(function () {
     $(".image-modal").css("display", "none");
     $("body").css("overflow", "auto"); // 모달이 닫히면 스크롤을 복구
   });
+
+  $("#modalProfileImageInput").on('change',function(){
+    var fileName = $("#modalProfileImageInput").val();
+    $(".upload-name").val(fileName);
+  });
 });
