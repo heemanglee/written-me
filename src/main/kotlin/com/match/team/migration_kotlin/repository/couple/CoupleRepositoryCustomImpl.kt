@@ -12,8 +12,7 @@ class CoupleRepositoryCustomImpl(
 
     override fun existsCouple(userId: Long): Boolean {
         val couple = queryFactory
-            .select(couple.count())
-            .from(couple)
+            .selectFrom(couple)
             .where(eqReceiverOrSender(userId))
             .fetch()
         return couple.size > 0
