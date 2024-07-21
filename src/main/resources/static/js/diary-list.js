@@ -262,3 +262,47 @@ document.addEventListener("DOMContentLoaded", function() {
     element.textContent = formattedDate;
   });
 });
+
+$(function() {
+  $("#couple_submit_btn").click(function() {
+    $.ajax({
+      type: "post",
+      url: "/api/couples",
+      success: function(data) {
+        var connectionToken = data.connectionToken
+        $("#create-inviteLink").val(connectionToken)
+        document.getElementById('inviteModal').style.display = 'block';
+      },
+      error: function(err) {
+        alert("이미 커플이 등록되어 있습니다!")
+      }
+    })
+  })
+})
+
+$(function() {
+  $("#enrollBtn").click(function() {
+    const token = document.getElementById('enroll-inviteLink').value;
+    $.ajax({
+      type: "get",
+      url: `/api/couples?token=${token}`,
+      success: function(data) {
+        const senderId = data.senderId
+
+        $.ajax({
+          type: "patch",
+          url: "/api/couples",
+          data: JSON.stringify({senderId: senderId}),
+          contentType: "application/json",
+          success: function(data) {
+            alert("연인 등록이 완료되었습니다!")
+            location.href="/diarys"
+          },
+          error: function(err) {
+            alert("연인 등록에 실패하였습니다.")
+          }
+        })
+      }
+    })
+  })
+})

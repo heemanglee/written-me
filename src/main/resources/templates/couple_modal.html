@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Example</title>
+  <link rel="stylesheet" href="/css/couple_modal.css">
+</head>
+<body>
+<button type="button" id="couple_submit_btn">커플 등록</button>
+
+<!-- Modal -->
+<div id="inviteModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Invite team members</h2>
+    <p>QR과 Link를 통해 팀원을 초대하여 회고를 함께하세요!</p>
+    <input type="text" id="inviteLink" readonly>
+    <button id="copyBtn">Copy</button>
+  </div>
+</div>
+
+<script src="/js/couple_modal.js"></script>
+</body>
+</html>

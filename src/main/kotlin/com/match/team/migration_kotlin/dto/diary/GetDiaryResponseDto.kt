@@ -9,5 +9,6 @@ data class GetDiaryResponseDto(
     val diaryDate: LocalDateTime,
     val feel: FeelStatus,
     val likeStatus: Boolean,
-    val aiResponseSummary: String
+    val aiResponseSummary: String,
+    val imagePath: String?
 )

@@ -329,4 +329,101 @@ body {
   cursor: pointer;
 }
 
+#couple_submit_btn {
+  margin-left: auto;
+  color: white;
+  background-color: #ee6e6e; /* 버튼 배경색 */
+  border: 1px solid #ee6e6e; /* 버튼 테두리 */
+  border-radius: 5px; /* 버튼 모서리 둥글게 */
+  padding: 5px 10px; /* 버튼 내부 여백 */
+  font-size: 16px; /* 버튼 글자 크기 */
+  cursor: pointer; /* 커서를 포인터로 변경 */
+  transition: background-color 0.3s; /* 배경색 전환 효과 */
+}
 
+.inviteModal {
+  display: none;
+
+}
+
+.invite-modal-content {
+  background-color: var(--result-item-bg);
+  padding: 30px;
+  border: 1px solid var(--result-item-border);
+  border-radius: 20px;
+  color: var(--text-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px; /* 최대 너비 설정 */
+  width: 90%; /* 화면 너비의 90% */
+  margin: 0 auto; /* 가운데 정렬 */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.closeInviteModal{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+#create-inviteLink {
+  flex: 1;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  overflow-y: auto;
+  width: 325px; /* 입력 창의 최대 너비 */
+  margin-bottom: 20px;
+}
+
+#copyBtn {
+  margin-left: 10px;
+  padding: 8px 12px;
+  background-color: #2b6f1c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#copyBtn:hover {
+  background-color: #0056b3;
+}
+
+#enroll-inviteLink {
+  flex: 1;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  overflow-y: auto;
+  width: 325px; /* 입력 창의 최대 너비 */
+}
+
+#enrollBtn {
+  margin-left: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#enrollBtn:hover {
+  background-color: #0056b3;
+}

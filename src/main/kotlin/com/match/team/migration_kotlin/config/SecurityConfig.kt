@@ -34,8 +34,8 @@ class SecurityConfig(
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
-//            .httpBasic()
-//            .and()
+            .httpBasic()
+            .and()
             .csrf { csrfConfig ->
                 run {
                     csrfConfig.disable()

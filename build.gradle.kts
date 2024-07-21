@@ -65,6 +65,9 @@ dependencies {
     testImplementation("org.mockito:mockito-core:4.0.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 
+    // Spring Data Redis
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
     runtimeOnly("com.h2database:h2")
 }
 

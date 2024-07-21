@@ -38,13 +38,15 @@
     </div>
   </div>
   <button type="button" id="search-btn">검색</button>
+  <button type="button" id="couple_submit_btn">커플 등록</button>
 </div>
 
 
   <div class="results">
     <div class="result-item" th:each="diary : ${diaryList}" th:data-index="${diary.diaryId}">
       <div class="profile">
-        <img th:src="${user.profileImage != null ? '/thumbnails/' + user.profileImage.uploadFileName : '/images/default_user_img.png'}" alt="Profile Image">
+        <img th:if="${diary.imagePath == null}" src="/images/default_user_img.png">
+        <img th:if="${diary.imagePath}" th:src="|/thumbnails/${diary.imagePath}|">
       </div>
       <div class="details nickName" th:data-index="${diary.diaryId}">
         <span th:text="${diary.nickName}">닉네임</span>
@@ -91,9 +93,31 @@
   </div>
 </div>
 
+
+<div>
+  <!-- 연인 등록 모달 -->
+  <div id="inviteModal" class="inviteModal">
+    <!-- 초대 링크 -->
+    <div class="invite-modal-content">
+      <span class="closeInviteModal">&times;</span>
+      <h2>연인을 등록해보세요!</h2>
+      <p>등록 코드를 복사하여 상대방에게 전달하세요!</p>
+      <input type="text" id="create-inviteLink" readonly>
+      <button id="copyBtn">복사</button>
+
+      <div class="couple-create-content">
+        <p>전달받은 코드를 등록하세요!</p>
+        <input type="text" id="enroll-inviteLink">
+        <button id="enrollBtn">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 
 <script src="/js/diary-list.js"></script>
+<script src="/js/couple_modal.js"></script>
 <!-- JSON 형태로 diaryList 데이터를 페이지에 삽입 -->
 <script th:inline="javascript">
   var diaryList = /*[[${diaryList}]]*/ '[]';
