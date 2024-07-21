@@ -40,7 +40,7 @@ body {
 
 .container {
   display: flex;
-  margin-top: 180px; /* 네비게이션 바 아래로 컨텐츠를 내리기 위해 */
+  margin-top: 100px; /* 네비게이션 바 아래로 컨텐츠를 내리기 위해 */
 }
 
 .sidebar {
