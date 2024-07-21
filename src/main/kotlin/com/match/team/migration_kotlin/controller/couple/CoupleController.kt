@@ -43,4 +43,12 @@ class CoupleController(
         val savedCouple = coupleService.createCouple(user, request)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCouple)
     }
+
+    @DeleteMapping
+    fun disConnectCouple(
+        @AuthenticationPrincipal user: User
+    ): ResponseEntity<Unit> {
+        coupleService.disConnectCouple(user)
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null)
+    }
 }

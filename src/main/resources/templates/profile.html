@@ -48,6 +48,15 @@
             <button id="nickName_edit_btn" type="button" class="nickname-edit-btn">수정</button>
           </div>
         </div>
+        <div class="form-group couple-group">
+          <label for="nickName">커플 정보</label>
+          <div class="couple-container">
+            <input type="text" id="couple" name="couple"
+                   th:placeholder="${user?.myCoupleNickName == null} ? '커플 상태가 아닙니다.' : ${user?.myCoupleNickName}" readonly>
+            <button th:if="${user?.myCoupleNickName == null}" id="couple_enrol_btn" type="button" class="couple_enrol_btn">연결</button>
+            <button th:if="${user?.myCoupleNickName != null}" id="couple_delete_btn" type="button" class="couple_delete_btn">끊기</button>
+          </div>
+        </div>
         <div class="form-group">
           <label for="age">나이</label>
           <input type="text" id="age" name="age" th:value="${user.age}" readonly>
@@ -102,6 +111,29 @@
     <button id="modalUploadBtn" type="button" class="modal_btn_submit">수정</button>
   </div>
 </div>
+</div>
+
+<div>
+  <!-- 연인 등록 모달 -->
+  <div id="inviteModal" class="inviteModal">
+    <!-- 초대 링크 -->
+    <div class="invite-modal-content">
+      <span class="closeInviteModal">&times;</span>
+      <h2>연인을 등록해보세요!</h2>
+      <p>
+        등록 코드를 복사하여 상대방에게 전달하세요!
+        <br> 코드는 한 시간 후에 만료됩니다.
+      </p>
+      <input type="text" id="create-inviteLink" readonly>
+      <button id="copyBtn">복사</button>
+
+      <div class="couple-create-content">
+        <p>전달받은 코드를 등록하세요!</p>
+        <input type="text" id="enroll-inviteLink">
+        <button id="enrollBtn">등록</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>

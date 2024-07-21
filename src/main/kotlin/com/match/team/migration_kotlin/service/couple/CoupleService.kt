@@ -25,4 +25,11 @@ class CoupleService(
         val savedCouple = coupleRepository.save(Couple.from(sender, receiver))
         return CreateCoupleResponseDto.from(savedCouple)
     }
+
+    @Transactional
+    fun disConnectCouple(user: User) {
+        val findCoupleDetail = coupleRepository.findCoupleDetail(user.id!!)
+            ?: throw IllegalArgumentException("커플 정보를 조회하는데 실패하였습니다. ID : ${user.id}")
+        coupleRepository.delete(findCoupleDetail)
+    }
 }

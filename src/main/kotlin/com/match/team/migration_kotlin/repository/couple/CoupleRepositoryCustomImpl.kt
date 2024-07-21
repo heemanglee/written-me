@@ -1,5 +1,6 @@
 package com.match.team.migration_kotlin.repository.couple
 
+import com.match.team.migration_kotlin.domain.couple.Couple
 import com.match.team.migration_kotlin.domain.couple.QCouple.couple
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
@@ -16,6 +17,13 @@ class CoupleRepositoryCustomImpl(
             .where(eqReceiverOrSender(userId))
             .fetch()
         return couple.size > 0
+    }
+
+    override fun findCoupleDetail(userId: Long): Couple? {
+        return queryFactory
+            .selectFrom(couple)
+            .where(eqReceiverOrSender(userId))
+            .fetchOne()
     }
 
     private fun eqReceiverOrSender(userId: Long): BooleanExpression {

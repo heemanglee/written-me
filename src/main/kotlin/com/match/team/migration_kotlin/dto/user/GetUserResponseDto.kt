@@ -6,7 +6,8 @@ data class GetUserResponseDto(
     val age: Int,
     val nickName: String,
     val password: String,
-    val uploadImageName: String?
+    val uploadImageName: String?,
+    val myCoupleNickName: String?
 ) {
 
     companion object {
@@ -16,9 +17,18 @@ data class GetUserResponseDto(
             age: Int,
             nickName: String,
             password: String,
-            uploadImageName: String?
+            uploadImageName: String?,
+            myCoupleNickName: String?
         ): GetUserResponseDto {
-            return GetUserResponseDto(userId, email, age, nickName, password, uploadImageName ?: "default_user_img.png")
+            return GetUserResponseDto(
+                userId,
+                email,
+                age,
+                nickName,
+                password,
+                uploadImageName ?: "default_user_img.png",
+                myCoupleNickName
+            )
         }
     }
 }

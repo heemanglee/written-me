@@ -115,4 +115,70 @@ $(function () {
     var fileName = $("#modalProfileImageInput").val();
     $(".upload-name").val(fileName);
   });
+
+  $("#couple_delete_btn").click(function() {
+    $.ajax({
+      type: "delete",
+      url: "/api/couples",
+      success: function(data) {
+        alert("커플이 정상적으로 해제되었습니다.")
+        location.href = "/users/profile"
+      },
+      error: function(err) {
+        alert("커플을 해제하는데 실패하였습니다.")
+    }
+    })
+  })
+
+  $("#couple_enrol_btn").click(function() {
+    $.ajax({
+      type: "post",
+      url: "/api/couples",
+      success: function(data) {
+        var connectionToken = data.connectionToken
+        $("#create-inviteLink").val(connectionToken)
+        $("body").css("overflow", "hidden");
+        document.getElementById('inviteModal').style.display = 'block';
+      },
+      error: function(err) {
+        alert("이미 커플이 등록되어 있습니다!")
+      }
+    })
+  })
+
+  $("#copyBtn").click(function() {
+    var inviteLink = $("#create-inviteLink").val()
+    navigator.clipboard.writeText(inviteLink).then(() => {
+      alert("초대코드가 복사되었습니다.")
+    })
+  })
+
+  $(".closeInviteModal").click(function() {
+    $(".inviteModal").css("display", "none");
+    $("body").css("overflow", "auto");
+  })
+
+  $("#enrollBtn").click(function() {
+    const token = document.getElementById('enroll-inviteLink').value;
+    $.ajax({
+      type: "get",
+      url: `/api/couples?token=${token}`,
+      success: function(data) {
+        const senderId = data.senderId
+        $.ajax({
+          type: "patch",
+          url: "/api/couples",
+          data: JSON.stringify({senderId: senderId}),
+          contentType: "application/json",
+          success: function(data) {
+            alert("커플 등록이 완료되었습니다!")
+            location.href="/users/profile"
+          },
+          error: function(err) {
+            alert("커플 등록에 실패하였습니다.")
+          }
+        })
+      }
+    })
+  })
 });

@@ -393,3 +393,129 @@ input[readonly] {
   font-weight: bold;
   font-size: 15px;
 }
+
+.couple-group .couple-container {
+  display: flex;
+  gap: 10px;
+}
+
+.couple-container input {
+  flex: 1;
+  width: 50%;
+}
+
+.couple_delete_btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.couple_delete_btn:hover {
+  background-color: darkred;
+}
+
+.couple_enrol_btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.couple_enrol_btn:hover {
+  background-color: #45a049;
+}
+
+.inviteModal {
+  display: none;
+}
+
+
+.closeInviteModal{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.invite-modal-content {
+  background-color: white;
+  padding: 30px;
+  border: 1px solid black; /* 테두리에 검은색 적용 */
+  border-radius: 20px;
+  color: var(--text-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px; /* 최대 너비 설정 */
+  width: 90%; /* 화면 너비의 90% */
+  margin: 0 auto; /* 가운데 정렬 */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow-y: auto;
+}
+
+#create-inviteLink {
+  flex: 1;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  overflow-y: auto;
+  width: 325px; /* 입력 창의 최대 너비 */
+  margin-bottom: 20px;
+}
+
+#copyBtn {
+  margin-left: 10px;
+  padding: 8px 12px;
+  background-color: #2b6f1c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#copyBtn:hover {
+  background-color: #0056b3;
+}
+
+#enroll-inviteLink {
+  flex: 1;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  overflow-y: auto;
+  width: 325px; /* 입력 창의 최대 너비 */
+}
+
+#enrollBtn {
+  margin-left: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#enrollBtn:hover {
+  background-color: #0056b3;
+}
