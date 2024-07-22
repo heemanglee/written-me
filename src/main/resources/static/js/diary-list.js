@@ -46,6 +46,7 @@ function getDiaryContent(index) {
 $(function () {
   $(".content-summary").click(function () {
     let index = parseInt($(this).attr("data-index"))
+    $("body").css("overflow", "hidden");
 
     $.ajax({
       type: "get",
@@ -56,7 +57,6 @@ $(function () {
           getDiaryContent(index)
         } else {
           $("#passwordModal").css("display", "block");
-          $("body").css("overflow", "hidden");
 
           $(".password-btn-submit").click(function() {
             var inputPassword = $("#passwordInput").val()
@@ -75,6 +75,7 @@ $(function () {
               },
               error: function (err) {
                 alert("서버가 장애가 발생하였습니다.")
+                $("body").css("overflow", "auto"); // 모달이 닫히면 스크롤을 복구
               }
             })
           })
@@ -90,6 +91,12 @@ $(function () {
     $(".modal").css("display", "none");
     $("body").css("overflow", "auto"); // 모달이 닫히면 스크롤을 복구
   });
+
+  $(".passwordModalClose").click(function () {
+    $(".passwordModal").css("display", "none");
+    $("body").css("overflow", "auto"); // 모달이 닫히면 스크롤을 복구
+  });
+
 
 })
 
@@ -314,6 +321,7 @@ $(function() {
       type: "post",
       url: "/api/couples",
       success: function(data) {
+        $("body").css("overflow", "hidden");
         var connectionToken = data.connectionToken
         $("#create-inviteLink").val(connectionToken)
         document.getElementById('inviteModal').style.display = 'block';
@@ -354,6 +362,7 @@ $(function() {
 
 // 모달 닫기 버튼
 document.getElementsByClassName('closeInviteModal')[0].addEventListener('click', function() {
+  $("body").css("overflow", "auto");
   document.getElementById('inviteModal').style.display = 'none';
 });
 
@@ -450,7 +459,7 @@ $(document).ready(function() {
       url: `/api/diarys/${currentDate.getFullYear()}/${currentDate.getMonth()}/date`,
       success: function(data) {
         renderCalendar(currentDate, data);
-        $('body').addClass('no-scroll'); // 스크롤 방지
+        $("body").css("overflow", "hidden")
       },
       error: function(err) {
 
@@ -465,7 +474,7 @@ $(document).ready(function() {
       url: `/api/diarys/${currentDate.getFullYear()}/${currentDate.getMonth()}/date`,
       success: function(data) {
         renderCalendar(currentDate, data);
-        $('body').addClass('no-scroll'); // 스크롤 방지
+        $("body").css("overflow", "hidden");
       },
       error: function(err) {
 
@@ -480,7 +489,7 @@ $(document).ready(function() {
       url: `/api/diarys/${currentDate.getFullYear()}/${currentDate.getMonth()}/date`,
       success: function(data) {
         renderCalendar(currentDate, data);
-        $('body').addClass('no-scroll'); // 스크롤 방지
+        $("body").css("overflow", "hidden");
       },
       error: function(err) {
 
@@ -490,6 +499,6 @@ $(document).ready(function() {
 
   $closeBtn.click(function() {
     $calendarContainer.addClass('hidden');
-    $('body').removeClass('no-scroll'); // 스크롤 복구
+    $("body").css("overflow", "auto");
   });
 });
