@@ -1,10 +1,7 @@
 package com.match.team.migration_kotlin.controller.diary
 
 import com.match.team.migration_kotlin.domain.user.User
-import com.match.team.migration_kotlin.dto.diary.CreateDiaryRequestDto
-import com.match.team.migration_kotlin.dto.diary.GetDiaryByYearAndMonthResponseDto
-import com.match.team.migration_kotlin.dto.diary.GetDiaryDetailResponseDto
-import com.match.team.migration_kotlin.dto.diary.GetDiaryResponseDto
+import com.match.team.migration_kotlin.dto.diary.*
 import com.match.team.migration_kotlin.service.diary.DiaryService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -63,6 +60,44 @@ class DiaryController(
     ): ResponseEntity<List<GetDiaryByYearAndMonthResponseDto>> {
         val diarys = diaryService.findDiaryByMonth(user, year, month)
         return ResponseEntity.ok(diarys)
+    }
+
+    @PatchMapping("/{diaryId}/password")
+    fun configurePassword(
+        @AuthenticationPrincipal user: User,
+        @PathVariable("diaryId") diaryId: Long,
+        @RequestBody request: DiaryPasswordCreateRequestDto
+    ): ResponseEntity<Unit> {
+        diaryService.updateSecretNumber(diaryId, request)
+        return ResponseEntity.status(HttpStatus.CREATED).body(null)
+    }
+
+    @DeleteMapping("/{diaryId}/password")
+    fun deletePassword(
+        @AuthenticationPrincipal user: User,
+        @PathVariable("diaryId") diaryId: Long,
+    ): ResponseEntity<Unit> {
+        diaryService.deleteSecretNumber(diaryId)
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null)
+    }
+
+    @GetMapping("/{diaryId}/password")
+    fun getDiaryPassword(
+        @AuthenticationPrincipal user: User,
+        @PathVariable("diaryId") diaryId: Long
+    ): ResponseEntity<GetDiaryPasswordResponseDto> {
+        val result = diaryService.findSecretNumber(diaryId)
+        return ResponseEntity.ok(result)
+    }
+
+    @PostMapping("/{diaryId}/password")
+    fun matchPassword(
+        @AuthenticationPrincipal user: User,
+        @PathVariable("diaryId") diaryId: Long,
+        @RequestBody request: CheckDiaryPasswordRequestDto
+    ): ResponseEntity<Boolean> {
+        val result = diaryService.isMatchDiaryPassword(diaryId, request)
+        return ResponseEntity.ok(result)
     }
 
 }

@@ -3,12 +3,14 @@ package com.match.team.migration_kotlin.repository.diary
 import com.match.team.migration_kotlin.domain.couple.QCouple.couple
 import com.match.team.migration_kotlin.domain.diary.FeelStatus
 import com.match.team.migration_kotlin.domain.diary.QDiary.diary
+import com.match.team.migration_kotlin.domain.diary.QSecret.secret
 import com.match.team.migration_kotlin.domain.file.QUploadFile.uploadFile
 import com.match.team.migration_kotlin.domain.openai.QMessage.message
 import com.match.team.migration_kotlin.domain.user.QUser
 import com.match.team.migration_kotlin.domain.user.User
 import com.match.team.migration_kotlin.dto.diary.GetDiaryByYearAndMonthResponseDto
 import com.match.team.migration_kotlin.dto.diary.GetDiaryDetailResponseDto
+import com.match.team.migration_kotlin.dto.diary.GetDiaryPasswordResponseDto
 import com.match.team.migration_kotlin.dto.diary.GetDiaryResponseDto
 import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.BooleanExpression
@@ -70,6 +72,28 @@ class DiaryRepositoryCustomImpl(
             .from(diary)
             .where(eqYearAndMonth(year, month))
             .fetch()
+    }
+
+    override fun findDiarySecretNumber(diaryId: Long): GetDiaryPasswordResponseDto? {
+        return queryFactory
+            .select(
+                Projections.constructor(
+                    GetDiaryPasswordResponseDto::class.java,
+                    diary.id, secret.secretNumber
+                )
+            )
+            .from(diary)
+            .leftJoin(secret).on(diary.secret.eq(secret))
+            .fetchOne()
+    }
+
+    override fun isMatchDiaryPassword(diaryId: Long, password: String): Boolean {
+        val findDiary = queryFactory
+            .selectFrom(diary)
+            .leftJoin(secret).on(diary.secret.id.eq(secret.id))
+            .where(secret.secretNumber.eq(password))
+            .fetchOne()
+        return findDiary != null
     }
 
     private fun filterByFeels(feels: List<String>?): BooleanExpression? {

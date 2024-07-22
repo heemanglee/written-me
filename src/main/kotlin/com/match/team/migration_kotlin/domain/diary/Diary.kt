@@ -27,6 +27,10 @@ class Diary(
     @JoinColumn(name = "message_id")
     val message: Message,
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "secret_id")
+    var secret: Secret? = null,
+
     @Column
     var isLike: Boolean = false,
 
@@ -52,5 +56,9 @@ class Diary(
 
     fun updateLikeStatus() {
         isLike = !isLike
+    }
+
+    fun configureSecretPassword(secret: Secret?) {
+        this.secret = secret
     }
 }

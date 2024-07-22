@@ -19,36 +19,81 @@ function getEmoji(feel) {
   return emoji
 }
 
+function getDiaryContent(index) {
+  $.ajax({
+    type: "get",
+    url: `/api/diarys/${index}`,
+    contentType: "application/json",
+    success: function (data) {
+      $(".modal").css("display", "block");
+      $("body").css("overflow", "hidden");
+      $("#modal_content").val(data.content);
+      $("#ai_response_content").val(data.aiResponse);
+
+      var emoji = getEmoji(data.feel);
+      $("#modal_feel").text(`기분 : ${emoji}`);
+
+      // 비밀번호 모달 닫기
+      closePasswordModal();
+    },
+    error: function (err) {
+      alert("서버에 장애가 발생하였습니다.");
+      return;
+    },
+  });
+}
+
 $(function () {
   $(".content-summary").click(function () {
     let index = parseInt($(this).attr("data-index"))
 
     $.ajax({
       type: "get",
-      url: `/api/diarys/${index}`,
-      contentType: "application/json",
+      url: `/api/diarys/${index}/password`,
+      async: false,
       success: function (data) {
-        $(".modal").css("display", "block");
-        $("body").css("overflow", "hidden"); // 모달이 열리면 스크롤을 막기
-        $("#modal_content").val(data.content)
-        $("#ai_response_content").val(data.aiResponse)
+        if (data?.secretNumber == null) {
+          getDiaryContent(index)
+        } else {
+          $("#passwordModal").css("display", "block");
+          $("body").css("overflow", "hidden");
 
-        var emoji = getEmoji(data.feel)
-
-        $("#modal_feel").text(`기분 : ${emoji}`)
+          $(".password-btn-submit").click(function() {
+            var inputPassword = $("#passwordInput").val()
+            $.ajax({
+              type: "post",
+              url: `/api/diarys/${index}/password`,
+              contentType: "application/json",
+              data: JSON.stringify({inputPassword: inputPassword}),
+              success: function (data) {
+                if(data) {
+                  $("#passwordModal").css("display", "none");
+                  getDiaryContent(index)
+                } else {
+                  alert("비밀번호가 일치하지 않습니다.")
+                }
+              },
+              error: function (err) {
+                alert("서버가 장애가 발생하였습니다.")
+              }
+            })
+          })
+        }
       },
       error: function (err) {
         alert("서버에 장애가 발생하였습니다.")
-        return
       }
     })
-  });
+  })
 
   $(".close").click(function () {
     $(".modal").css("display", "none");
     $("body").css("overflow", "auto"); // 모달이 닫히면 스크롤을 복구
   });
 
+})
+
+$(function() {
   $("#search-btn").click(function () {
     let selectedFeelings = [];
 
