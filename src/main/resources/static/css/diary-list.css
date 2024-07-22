@@ -177,7 +177,7 @@ body {
   cursor: pointer;
 }
 
-.modal-overlay {
+#diaryModalOverlay {
   display: none;
   position: fixed;
   z-index: 999;
