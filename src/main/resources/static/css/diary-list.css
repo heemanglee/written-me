@@ -460,15 +460,16 @@ body {
 
 .calendar-close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 28px;
   background: transparent;
   border: none;
-  font-size: 24px; /* 버튼 크기 */
+  font-size: 30px; /* 버튼 크기 */
   cursor: pointer;
   color: #000;
   transition: color 0.3s ease;
   margin-bottom: 30px;
+  margin-right: 30px;
 }
 
 .calendar-close-btn:hover {
