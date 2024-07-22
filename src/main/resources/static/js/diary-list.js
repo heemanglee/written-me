@@ -25,6 +25,7 @@ function getDiaryContent(index) {
     url: `/api/diarys/${index}`,
     contentType: "application/json",
     success: function (data) {
+      applyModalBackground();
       $(".modal").css("display", "block");
       $("body").css("overflow", "hidden");
       $("#modal_content").val(data.content);
@@ -33,8 +34,6 @@ function getDiaryContent(index) {
       var emoji = getEmoji(data.feel);
       $("#modal_feel").text(`기분 : ${emoji}`);
 
-      // 비밀번호 모달 닫기
-      closePasswordModal();
     },
     error: function (err) {
       alert("서버에 장애가 발생하였습니다.");
@@ -72,6 +71,7 @@ $(function () {
                 } else {
                   alert("비밀번호가 일치하지 않습니다.")
                 }
+                $("#passwordInput").val("")
               },
               error: function (err) {
                 alert("서버가 장애가 발생하였습니다.")
@@ -88,11 +88,13 @@ $(function () {
   })
 
   $(".close").click(function () {
+    removeModalBackground();
     $(".modal").css("display", "none");
     $("body").css("overflow", "auto"); // 모달이 닫히면 스크롤을 복구
   });
 
   $(".passwordModalClose").click(function () {
+    removeModalBackground();
     $(".passwordModal").css("display", "none");
     $("body").css("overflow", "auto"); // 모달이 닫히면 스크롤을 복구
   });
@@ -153,6 +155,8 @@ $(function() {
                             </div>
                         </div>
                     `;
+
+          applyModalBackground();
           $(".results").append(diaryHtml);
         });
       },
@@ -362,6 +366,7 @@ $(function() {
 
 // 모달 닫기 버튼
 document.getElementsByClassName('closeInviteModal')[0].addEventListener('click', function() {
+  removeModalBackground()
   $("body").css("overflow", "auto");
   document.getElementById('inviteModal').style.display = 'none';
 });
@@ -446,6 +451,7 @@ $(document).ready(function() {
         }
       }
 
+      applyModalBackground();
       $calendarDatesElem.append($dateElem);
     }
   }
@@ -498,7 +504,30 @@ $(document).ready(function() {
   });
 
   $closeBtn.click(function() {
+    removeModalBackground();
     $calendarContainer.addClass('hidden');
     $("body").css("overflow", "auto");
   });
 });
+
+function applyModalBackground() {
+  $(".modalBackground").css({
+    "position": "absolute",
+    "top": "0",
+    "left": "0",
+    "width": "100%",
+    "height": "100%",
+    "backdrop-filter": "blur(5px)"
+  });
+}
+
+function removeModalBackground() {
+  $(".modalBackground").css({
+    "position": "",
+    "top": "",
+    "left": "",
+    "width": "",
+    "height": "",
+    "backdrop-filter": "blur(1px)",
+  });
+}

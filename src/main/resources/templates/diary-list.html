@@ -8,43 +8,43 @@
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
-<div th:replace="fragments/navbar.html :: navbarFragment"></div>
+  <div th:replace="fragments/navbar.html :: navbarFragment"></div>
 
-<div class="search-bar">
-  <div class="left-buttons">
-    <div class="dropdown">
-      <button class="dropdown-toggle" id="toggle-btn" onclick="toggleDropdown()">선택</button>
-      <div class="dropdown-menu">
-        <label class="dropdown-item">
-          <input type="checkbox" onchange="updateLabel()" name="search-feel" value="HAPPY">
-          😊행복
-        </label>
-        <label class="dropdown-item">
-          <input type="checkbox" onchange="updateLabel()" name="search-feel" value="GOOD">
-          🙂좋음
-        </label>
-        <label class="dropdown-item">
-          <input type="checkbox" onchange="updateLabel()" name="search-feel" value="NOT_BAD">
-          😐보통
-        </label>
-        <label class="dropdown-item">
-          <input type="checkbox" onchange="updateLabel()" name="search-feel" value="BAD">
-          😞나쁨
-        </label>
-        <label class="dropdown-item">
-          <input type="checkbox" onchange="updateLabel()" name="search-feel" value="ANGRY">
-          😠화남
-        </label>
-        <button class="apply-btn" onclick="applySelection()">적용</button>
+  <div class="search-bar">
+    <div class="left-buttons">
+      <div class="dropdown">
+        <button class="dropdown-toggle" id="toggle-btn" onclick="toggleDropdown()">선택</button>
+        <div class="dropdown-menu">
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="updateLabel()" name="search-feel" value="HAPPY">
+            😊행복
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="updateLabel()" name="search-feel" value="GOOD">
+            🙂좋음
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="updateLabel()" name="search-feel" value="NOT_BAD">
+            😐보통
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="updateLabel()" name="search-feel" value="BAD">
+            😞나쁨
+          </label>
+          <label class="dropdown-item">
+            <input type="checkbox" onchange="updateLabel()" name="search-feel" value="ANGRY">
+            😠화남
+          </label>
+          <button class="apply-btn" onclick="applySelection()">적용</button>
+        </div>
       </div>
+      <button type="button" id="search-btn">검색</button>
     </div>
-    <button type="button" id="search-btn">검색</button>
+    <div class="right-buttons">
+      <button type="button" id="calendar-open-btn">달력 열기</button>
+      <button type="button" id="couple_submit_btn">커플 등록</button>
+    </div>
   </div>
-  <div class="right-buttons">
-    <button type="button" id="calendar-open-btn">달력 열기</button>
-    <button type="button" id="couple_submit_btn">커플 등록</button>
-  </div>
-</div>
 
 
   <div class="results">
@@ -82,72 +82,73 @@
 
 
 <!-- modal -->
-<div id="diaryModalOverlay"></div>
-<div>
-  <div id="diaryDetailModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>내가 작성한 일기</h2>
-      <label for="modal_content"><span id="modal_feel"></span> </label>
-      <textarea rows="10" id="modal_content" name="modal_content" readonly></textarea>
-      <div class="ai-response">
-        <h3>AI 응답</h3>
-        <textarea rows="6" id="ai_response_content" readonly>AI가 생성한 응답</textarea>
+  <div id="diaryModalOverlay"></div>
+  <div>
+    <div id="diaryDetailModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>내가 작성한 일기</h2>
+        <label for="modal_content"><span id="modal_feel"></span> </label>
+        <textarea rows="10" id="modal_content" name="modal_content" readonly></textarea>
+        <div class="ai-response">
+          <h3>AI 응답</h3>
+          <textarea rows="6" id="ai_response_content" readonly>AI가 생성한 응답</textarea>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<div>
   <!-- 연인 등록 모달 -->
-  <div id="inviteModal" class="inviteModal">
-    <!-- 초대 링크 -->
-    <div class="invite-modal-content">
-      <span class="closeInviteModal">&times;</span>
-      <h2>연인을 등록해보세요!</h2>
-      <p>
-        등록 코드를 복사하여 상대방에게 전달하세요!
-        <br> 코드는 한 시간 후에 만료됩니다.
-      </p>
-      <input type="text" id="create-inviteLink" readonly>
-      <button id="copyBtn">복사</button>
+    <div id="inviteModal" class="inviteModal">
+      <!-- 초대 링크 -->
+      <div class="invite-modal-content">
+        <span class="closeInviteModal">&times;</span>
+        <h2>연인을 등록해보세요!</h2>
+        <p>
+          등록 코드를 복사하여 상대방에게 전달하세요!
+          <br> 코드는 한 시간 후에 만료됩니다.
+        </p>
+        <input type="text" id="create-inviteLink" readonly>
+        <button id="copyBtn">복사</button>
 
-      <div class="couple-create-content">
-        <p>전달받은 코드를 등록하세요!</p>
-        <input type="text" id="enroll-inviteLink">
-        <button id="enrollBtn">등록</button>
+        <div class="couple-create-content">
+          <p>전달받은 코드를 등록하세요!</p>
+          <input type="text" id="enroll-inviteLink">
+          <button id="enrollBtn">등록</button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div id="calendar-container" class="hidden">
-  <button id="close-btn" class="calendar-close-btn">&times;</button>
-  <div id="calendar-header">
-    <button id="prev-month-btn">&lt;</button>
-    <span id="current-month"></span>
-    <button id="next-month-btn">&gt;</button>
-  </div>
-  <div id="calendar-body">
-    <div id="calendar-days">
-      <!-- 요일 -->
+  <div class="modalBackground"></div>
+    <div id="calendar-container" class="hidden">
+      <button id="close-btn" class="calendar-close-btn">&times;</button>
+      <div id="calendar-header">
+        <button id="prev-month-btn">&lt;</button>
+        <span id="current-month"></span>
+        <button id="next-month-btn">&gt;</button>
+      </div>
+      <div id="calendar-body">
+        <div id="calendar-days">
+          <!-- 요일 -->
+        </div>
+        <div id="calendar-dates">
+          <!-- 날짜 -->
+        </div>
+      </div>
     </div>
-    <div id="calendar-dates">
-      <!-- 날짜 -->
-    </div>
-  </div>
-</div>
 
 <!-- 비밀번호 모달 -->
-<div class="passwordModal" id="passwordModal">
-  <div class="password-modal-content" id="passwordModalContent">
-    <span class="passwordModalClose">&times;</span>
-    <h2>비밀번호 확인</h2>
-    <input type="password" id="passwordInput" placeholder="비밀번호 입력">
-    <button type=button class="password-btn-submit">확인</button>
-  </div>
-</div>
+  <div class="modalBackground">
+    <div class="passwordModal" id="passwordModal">
+      <div class="password-modal-content" id="passwordModalContent">
+        <span class="passwordModalClose">&times;</span>
+        <h2>비밀번호 확인</h2>
+        <input type="password" id="passwordInput" placeholder="비밀번호 입력">
+        <button type=button class="password-btn-submit">확인</button>
+      </div>
+    </div>
+  </div>>
 
 
 </body>
