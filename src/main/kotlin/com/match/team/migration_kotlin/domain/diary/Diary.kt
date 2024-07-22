@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor
 class Diary(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "diarys_id")
+    @Column(name = "diary_id")
     val id: Long? = null,
 
     @Enumerated(EnumType.STRING)

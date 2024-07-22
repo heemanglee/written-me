@@ -329,25 +329,25 @@ $(function ()  {
   })
 })
 
-document.addEventListener('DOMContentLoaded', function() {
-  const calendarOpenBtn = document.getElementById('calendar-open-btn');
-  const calendarContainer = document.getElementById('calendar-container');
-  const currentMonthElem = document.getElementById('current-month');
-  const calendarDaysElem = document.getElementById('calendar-days');
-  const calendarDatesElem = document.getElementById('calendar-dates');
-  const prevMonthBtn = document.getElementById('prev-month-btn');
-  const nextMonthBtn = document.getElementById('next-month-btn');
+$(document).ready(function() {
+  const $calendarOpenBtn = $('#calendar-open-btn');
+  const $calendarContainer = $('#calendar-container');
+  const $currentMonthElem = $('#current-month');
+  const $calendarDaysElem = $('#calendar-days');
+  const $calendarDatesElem = $('#calendar-dates');
+  const $prevMonthBtn = $('#prev-month-btn');
+  const $nextMonthBtn = $('#next-month-btn');
+  const $closeBtn = $('#close-btn');
 
   let currentDate = new Date();
-  let commitDates = [1, 5, 10, 15, 20, 25]; // 커밋이 있는 날짜 (예시)
 
-  function renderCalendar(date) {
+  function renderCalendar(date, data) {
     const year = date.getFullYear();
     const month = date.getMonth();
-    currentMonthElem.textContent = `${year}년 ${month + 1}월`;
+    $currentMonthElem.text(`${year}년 ${month + 1}월`);
 
-    calendarDaysElem.innerHTML = '';
-    calendarDatesElem.innerHTML = '';
+    $calendarDaysElem.empty();
+    $calendarDatesElem.empty();
 
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
@@ -356,46 +356,95 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 요일 추가
     ['일', '월', '화', '수', '목', '금', '토'].forEach(day => {
-      const dayElem = document.createElement('div');
-      dayElem.textContent = day;
-      calendarDaysElem.appendChild(dayElem);
+      const $dayElem = $('<div>').text(day);
+      $calendarDaysElem.append($dayElem);
     });
 
     // 날짜 추가
     for (let i = 0; i < startDay; i++) {
-      calendarDatesElem.appendChild(document.createElement('div'));
+      $calendarDatesElem.append($('<div>'));
     }
 
     for (let day = 1; day <= totalDays; day++) {
-      const dateElem = document.createElement('div');
-      dateElem.textContent = day;
+      const $dateElem = $('<div>').text(day);
 
-      if (commitDates.includes(day)) {
-        dateElem.classList.add('commit-day');
+      // 해당 날짜의 데이터가 있는지 확인
+      const dayData = data.find(item => item.day === day);
+      if (dayData) {
+        $dateElem.addClass('commit-day');
+        // feelStatus에 따라 클래스 추가
+        switch (dayData.feel) {
+          case 'HAPPY':
+            $dateElem.addClass('mood-happy').append(' 😊');
+            break;
+          case 'GOOD':
+            $dateElem.addClass('mood-good').append(' 🙂');
+            break;
+          case 'NOT_BAD':
+            $dateElem.addClass('mood-not-bad').append(' 😐');
+            break;
+          case 'BAD':
+            $dateElem.addClass('mood-bad').append(' 😞');
+            break;
+          case 'ANGRY':
+            $dateElem.addClass('mood-angry').append(' 😠');
+            break;
+        }
       }
 
-      calendarDatesElem.appendChild(dateElem);
+      $calendarDatesElem.append($dateElem);
     }
   }
 
-  calendarOpenBtn.addEventListener('click', function() {
-    calendarContainer.classList.toggle('hidden');
-    renderCalendar(currentDate);
-    document.body.classList.add('no-scroll'); // 스크롤 방지
-  });
 
-  prevMonthBtn.addEventListener('click', function() {
+  $calendarOpenBtn.click(function() {
+    $calendarContainer.toggleClass('hidden');
+    currentDate.setMonth(currentDate.getMonth())
+    $.ajax({
+      type: "get",
+      url: `/api/diarys/${currentDate.getFullYear()}/${currentDate.getMonth()}/date`,
+      success: function(data) {
+        renderCalendar(currentDate, data);
+        $('body').addClass('no-scroll'); // 스크롤 방지
+      },
+      error: function(err) {
+
+      }
+    })
+  })
+
+  $prevMonthBtn.click(function() {
     currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar(currentDate);
+    $.ajax({
+      type: "get",
+      url: `/api/diarys/${currentDate.getFullYear()}/${currentDate.getMonth()}/date`,
+      success: function(data) {
+        renderCalendar(currentDate, data);
+        $('body').addClass('no-scroll'); // 스크롤 방지
+      },
+      error: function(err) {
+
+      }
+    })
   });
 
-  nextMonthBtn.addEventListener('click', function() {
+  $nextMonthBtn.click(function() {
     currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar(currentDate);
-  });
-});
+    $.ajax({
+      type: "get",
+      url: `/api/diarys/${currentDate.getFullYear()}/${currentDate.getMonth()}/date`,
+      success: function(data) {
+        renderCalendar(currentDate, data);
+        $('body').addClass('no-scroll'); // 스크롤 방지
+      },
+      error: function(err) {
 
-document.getElementById('close-btn').addEventListener('click', function() {
-  document.getElementById('calendar-container').classList.add('hidden');
-  document.body.classList.remove('no-scroll'); // 스크롤 복구
+      }
+    })
+  });
+
+  $closeBtn.click(function() {
+    $calendarContainer.addClass('hidden');
+    $('body').removeClass('no-scroll'); // 스크롤 복구
+  });
 });

@@ -59,4 +59,10 @@ class DiaryService(
         findDiary.updateLikeStatus()
     }
 
+    @Transactional(readOnly = true)
+    fun findDiaryByMonth(user: User, year: Int, month: Int): List<GetDiaryByYearAndMonthResponseDto> {
+        val findDiarys = diaryRepository.findDiaryByMonth(user, year, month)
+        return findDiarys
+    }
+
 }

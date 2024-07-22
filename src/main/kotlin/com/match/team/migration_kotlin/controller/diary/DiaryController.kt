@@ -2,6 +2,7 @@ package com.match.team.migration_kotlin.controller.diary
 
 import com.match.team.migration_kotlin.domain.user.User
 import com.match.team.migration_kotlin.dto.diary.CreateDiaryRequestDto
+import com.match.team.migration_kotlin.dto.diary.GetDiaryByYearAndMonthResponseDto
 import com.match.team.migration_kotlin.dto.diary.GetDiaryDetailResponseDto
 import com.match.team.migration_kotlin.dto.diary.GetDiaryResponseDto
 import com.match.team.migration_kotlin.service.diary.DiaryService
@@ -52,6 +53,16 @@ class DiaryController(
     ): ResponseEntity<List<GetDiaryResponseDto>> {
         val result = diaryService.getDiaryAll(user, feels)
         return ResponseEntity.ok(result)
+    }
+
+    @GetMapping("/{year}/{month}/date")
+    fun getDiaryByDate(
+        @AuthenticationPrincipal user: User,
+        @PathVariable("year") year: Int,
+        @PathVariable("month") month: Int,
+    ): ResponseEntity<List<GetDiaryByYearAndMonthResponseDto>> {
+        val diarys = diaryService.findDiaryByMonth(user, year, month)
+        return ResponseEntity.ok(diarys)
     }
 
 }

@@ -13,20 +13,20 @@
   --mood-angry-bg: #ffb3b3; /* 연한 빨간색 */
 }
 
-.dark-theme {
-  --background-color: #121212;
-  --text-color: #ddd;
-  --search-bar-bg: #333;
-  --search-bar-btn-bg: #444;
-  --search-bar-btn-text: #ddd;
-  --result-item-border: #555;
-  --result-item-bg: #222;
-  --mood-happy-bg: #527a95;
-  --mood-good-bg: #527a5c;
-  --mood-not-bad-bg: #7a7a52;
-  --mood-bad-bg: #595959;
-  --mood-angry-bg: #7a5252;
-}
+/*.dark-theme {*/
+/*  --background-color: #121212;*/
+/*  --text-color: #ddd;*/
+/*  --search-bar-bg: #333;*/
+/*  --search-bar-btn-bg: #444;*/
+/*  --search-bar-btn-text: #ddd;*/
+/*  --result-item-border: #555;*/
+/*  --result-item-bg: #222;*/
+/*  --mood-happy-bg: #527a95;*/
+/*  --mood-good-bg: #527a5c;*/
+/*  --mood-not-bad-bg: #7a7a52;*/
+/*  --mood-bad-bg: #595959;*/
+/*  --mood-angry-bg: #7a5252;*/
+/*}*/
 
 body {
   font-family: Arial, sans-serif;
@@ -511,8 +511,28 @@ body {
 }
 
 #calendar-dates .commit-day {
-  background-color: #4caf50;
-  color: white;
+  color: black;
+}
+
+/* 기분 상태별 색상 */
+#calendar-dates .commit-day.mood-happy {
+  background-color: var(--mood-happy-bg) !important; /* 연한 하늘색 */
+}
+
+#calendar-dates .commit-day.mood-good {
+  background-color: var(--mood-good-bg) !important; /* 연한 초록색 */
+}
+
+#calendar-dates .commit-day.mood-not-bad {
+  background-color: var(--mood-not-bad-bg) !important; /* 연한 노란색 */
+}
+
+#calendar-dates .commit-day.mood-bad {
+  background-color: var(--mood-bad-bg) !important; /* 연한 회색 */
+}
+
+#calendar-dates .commit-day.mood-angry {
+  background-color: var(--mood-angry-bg) !important; /* 연한 빨간색 */
 }
 
 body.no-scroll {
