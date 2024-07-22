@@ -84,6 +84,7 @@ class DiaryRepositoryCustomImpl(
             )
             .from(diary)
             .leftJoin(secret).on(diary.secret.eq(secret))
+            .where(diary.id.eq(diaryId))
             .fetchOne()
     }
 
