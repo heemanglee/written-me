@@ -572,8 +572,14 @@ body.no-scroll {
   color: var(--text-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
   text-align: center;
-  max-width: 500px; /* 최대 가로 너비를 400px로 설정 */
+  width: 400px; /* 가로 길이 설정 */
+  height: 100px; /* 세로 길이 설정 */
   margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto; /* 내용이 많을 경우 스크롤 */
 }
 
 #password-modal-content {
