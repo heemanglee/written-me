@@ -568,13 +568,20 @@ $(function() {
               <div class="mood mood-${diary.feel}">
                 <span>${diary.feel}</span>
               </div>
+          `;
+
+          // // 조건에 따라 like 버튼 추가
+          if (selectedValue === "all") {
+            diaryHtml += `
               <div class="like">
                 <button class="like-btn" type="button" data-index="${diary.diaryId}">
                   ${likeStatus}
                 </button>
               </div>
-            </div>
-          `;
+            `;
+          }
+
+          diaryHtml += `</div>`; // result-item 닫는 태그
 
           $(".results").append(diaryHtml);
         });
@@ -620,6 +627,33 @@ $(function() {
             },
             error: function(err) {
               alert("서버에 장애가 발생하였습니다.");
+            }
+          });
+        });
+
+        // 동적으로 생성된 .like-btn 요소에 클릭 이벤트를 바인딩
+        $(".results").on("click", ".like-btn", function() {
+          let index = parseInt($(this).attr("data-index"));
+          let heart = $(this).find('span').text();
+          // 하트 아이콘을 토글
+          if (heart === "❤️") {
+            $(this).find('span').text("🩶");
+          } else {
+            $(this).find('span').text("❤️");
+          }
+
+          $.ajax({
+            type: "PATCH",
+            url: `/api/diarys/${index}/like`,
+            success: function(data) {
+              console.log("좋아요 상태가 변경되었습니다.");
+              // 특정 data-index의 like-btn 상태를 변경
+              $(`.like-btn[data-index="${index}"] span`).text(function(_, text) {
+                return text === "❤️" ? "🩶" : "❤️";
+              });
+            },
+            error: function(err) {
+              alert("서버가 장애가 발생하였습니다.");
             }
           });
         });
