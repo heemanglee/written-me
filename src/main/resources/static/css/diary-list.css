@@ -596,3 +596,7 @@ body.no-scroll {
   text-decoration: none;
   cursor: pointer;
 }
+
+.radio-filter-container {
+  left: 20px;
+}

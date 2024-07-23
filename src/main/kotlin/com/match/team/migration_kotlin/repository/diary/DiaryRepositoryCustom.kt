@@ -17,4 +17,6 @@ interface DiaryRepositoryCustom {
     fun findDiarySecretNumber(diaryId: Long): GetDiaryPasswordResponseDto?
 
     fun isMatchDiaryPassword(diaryId: Long, password: String): Boolean
+
+    fun findFilterCategory(user: User, category: String): List<GetDiaryResponseDto>
 }

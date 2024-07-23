@@ -114,4 +114,10 @@ class DiaryService(
         val findDiary =  diaryRepository.findByIdOrThrow(diaryId)
         return passwordEncoder.matches(request.inputPassword, findDiary.secret?.secretNumber)
     }
+
+    @Transactional(readOnly = true)
+    fun getFilterCategoryDiarys(user: User, category: String): List<GetDiaryResponseDto> {
+        val findDiarys = diaryRepository.findFilterCategory(user, category)
+        return findDiarys
+    }
 }

@@ -531,3 +531,102 @@ function removeModalBackground() {
     "backdrop-filter": "blur(1px)",
   });
 }
+
+$(function() {
+  $('input[name="personal-couple-filter"]').change(function() {
+    var selectedValue = $('input[name="personal-couple-filter"]:checked').val();
+    $.ajax({
+      type: "get",
+      url: `/api/diarys/${selectedValue}/items`,
+      success: function(data) {
+        // 기존 콘텐츠를 지움
+        $(".results").empty();
+
+        // 필터링된 데이터로 새로운 HTML을 구성하여 추가
+        data.forEach(diary => {
+          let likeStatus = diary.likeStatus ? '❤️' : '🩶';
+          let imagePath = diary.imagePath ? `/thumbnails/${diary.imagePath}` : '/images/default_user_img.png';
+          let summaryText = diary.aiResponseSummary ? diary.aiResponseSummary : 'AI 응답 요약본';
+          let date = formatDate(diary.diaryDate);
+
+          let diaryHtml = `
+            <div class="result-item" data-index="${diary.diaryId}">
+              <div class="profile">
+                <img src="${imagePath}" alt="Profile Image">
+              </div>
+              <div class="details nickName" data-index="${diary.diaryId}">
+                <span>${diary.nickName}</span>
+              </div>
+              <div class="content-summary" data-index="${diary.diaryId}">
+                <span>${summaryText}</span>
+              </div>
+              <div class="time">
+                <p>
+                  <span class="diary-date">${date}</span>
+                </p>
+              </div>
+              <div class="mood mood-${diary.feel}">
+                <span>${diary.feel}</span>
+              </div>
+              <div class="like">
+                <button class="like-btn" type="button" data-index="${diary.diaryId}">
+                  ${likeStatus}
+                </button>
+              </div>
+            </div>
+          `;
+
+          $(".results").append(diaryHtml);
+        });
+
+        // 동적으로 생성된 .content-summary 요소에 클릭 이벤트를 바인딩
+        $(".results").on("click", ".content-summary", function() {
+          let index = parseInt($(this).attr("data-index"));
+          $("body").css("overflow", "hidden");
+
+          $.ajax({
+            type: "get",
+            url: `/api/diarys/${index}/password`,
+            async: false,
+            success: function(data) {
+              if (data?.secretNumber == null) {
+                getDiaryContent(index);
+              } else {
+                $("#passwordModal").css("display", "block");
+
+                $(".password-btn-submit").click(function() {
+                  var inputPassword = $("#passwordInput").val();
+                  $.ajax({
+                    type: "post",
+                    url: `/api/diarys/${index}/password`,
+                    contentType: "application/json",
+                    data: JSON.stringify({ inputPassword: inputPassword }),
+                    success: function(data) {
+                      if (data) {
+                        $("#passwordModal").css("display", "none");
+                        getDiaryContent(index);
+                      } else {
+                        alert("비밀번호가 일치하지 않습니다.");
+                      }
+                      $("#passwordInput").val("");
+                    },
+                    error: function(err) {
+                      alert("서버가 장애가 발생하였습니다.");
+                      $("body").css("overflow", "auto"); // 모달이 닫히면 스크롤을 복구
+                    }
+                  });
+                });
+              }
+            },
+            error: function(err) {
+              alert("서버에 장애가 발생하였습니다.");
+            }
+          });
+        });
+      },
+      error: function(err) {
+        alert("error");
+      }
+    });
+  });
+});

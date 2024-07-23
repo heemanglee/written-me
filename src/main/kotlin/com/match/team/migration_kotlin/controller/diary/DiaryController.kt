@@ -100,4 +100,13 @@ class DiaryController(
         return ResponseEntity.ok(result)
     }
 
+    @GetMapping("/{category}/items")
+    fun getFilterCategoryDiarys(
+        @AuthenticationPrincipal user: User,
+        @PathVariable("category") category: String
+    ): ResponseEntity<List<GetDiaryResponseDto>> {
+        val result = diaryService.getFilterCategoryDiarys(user, category)
+        return ResponseEntity.ok(result)
+    }
+
 }

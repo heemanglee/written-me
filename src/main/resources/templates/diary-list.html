@@ -46,6 +46,11 @@
     </div>
   </div>
 
+  <div name="radio-filter-container">
+    <input type="radio" name="personal-couple-filter" value="all"> 전체 일기
+    <input type="radio" name="personal-couple-filter" value="personal"> 개인 일기
+    <input type="radio" name="personal-couple-filter" value="couple"> 상대방 일기
+  </div>
 
   <div class="results">
     <div class="result-item" th:each="diary : ${diaryList}" th:data-index="${diary.diaryId}">

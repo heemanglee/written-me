@@ -60,7 +60,11 @@ class DiaryRepositoryCustomImpl(
             .fetchOne()
     }
 
-    override fun findDiaryByMonth(user: User, year: Int, month: Int): List<GetDiaryByYearAndMonthResponseDto> {
+    override fun findDiaryByMonth(
+        user: User,
+        year: Int,
+        month: Int
+    ): List<GetDiaryByYearAndMonthResponseDto> {
         return queryFactory
             .select(
                 Projections.constructor(
@@ -97,6 +101,29 @@ class DiaryRepositoryCustomImpl(
         return findDiary != null
     }
 
+    override fun findFilterCategory(user: User, category: String): List<GetDiaryResponseDto> {
+        return queryFactory
+            .select(
+                Projections.constructor(
+                    GetDiaryResponseDto::class.java,
+                    diary.id,
+                    QUser.user.nickName,
+                    diary.createdDate,
+                    diary.feelStatus,
+                    diary.isLike,
+                    message.summary,
+                    uploadFile.uploadFileName
+                )
+            )
+            .from(diary)
+            .join(message).on(diary.message.eq(message)).fetchJoin()
+            .join(QUser.user).on(diary.user.eq(QUser.user)).fetchJoin()
+            .leftJoin(uploadFile).on(uploadFile.eq(QUser.user.profileImage)).fetchJoin()
+            .leftJoin(couple).on(couple.sender.eq(user).or(couple.receiver.eq(user))).fetchJoin()
+            .where(filterCategory(user, category))
+            .fetch()
+    }
+
     private fun filterByFeels(feels: List<String>?): BooleanExpression? {
         return feels?.let {
             diary.feelStatus.`in`(feels.map { FeelStatus.valueOf(it) })
@@ -109,6 +136,15 @@ class DiaryRepositoryCustomImpl(
 
     private fun eqYearAndMonth(year: Int, month: Int): BooleanExpression? {
         return diary.createdDate.year().eq(year).and(diary.createdDate.month().eq(month + 1))
+    }
+
+    private fun filterCategory(user: User, category: String): BooleanExpression? {
+        if (category == "all") {
+            return null
+        } else if (category == "personal") {
+            return diary.user.eq(user)
+        }
+        return diary.user.ne(user)
     }
 
 }
