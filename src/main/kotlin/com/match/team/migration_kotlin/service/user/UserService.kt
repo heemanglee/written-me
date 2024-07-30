@@ -1,10 +1,13 @@
 package com.match.team.migration_kotlin.service.user
 
+import com.match.team.migration_kotlin.domain.file.FileStore
 import com.match.team.migration_kotlin.domain.user.User
 import com.match.team.migration_kotlin.dto.user.*
+import com.match.team.migration_kotlin.repository.file.UploadFileRepository
 import com.match.team.migration_kotlin.repository.user.UserRepository
 import com.match.team.migration_kotlin.util.fail
 import lombok.RequiredArgsConstructor
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -13,7 +16,11 @@ import org.springframework.transaction.annotation.Transactional
 @RequiredArgsConstructor
 class UserService(
     private val userRepository: UserRepository,
-    private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder,
+    private val uploadFileRepository: UploadFileRepository,
+
+    @Qualifier("s3FileStore")
+    private val fileStore: FileStore
 ) {
 
     @Transactional
@@ -79,10 +86,20 @@ class UserService(
         request: DeleteProfileImageRequestDto
     ) {
         if (isSameImageName(user, request.deleteImageName)) {
+            fileStore.deleteFile(user.profileImage!!.uploadFileName)
+            uploadFileRepository.deleteById(user.profileImage!!.id!!)
             user.updateImagePath(null)
         } else {
             fail("프로필 이미지를 삭제할 수 없습니다. 이미지 이름 = ${request.deleteImageName}")
         }
+    }
+
+    @Transactional(readOnly = true)
+    fun getUserImageUploadUrl(user: User): String? {
+        if(user.profileImage == null)  {
+            return null
+        }
+        return fileStore.getUploadFileUrl(user.profileImage!!.uploadFileName)
     }
 
     // 삭제를 하고자하는 이미지와 사용자가 가지고 있는 이미지가 일치하는지 여부 반환

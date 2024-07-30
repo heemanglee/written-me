@@ -6,6 +6,7 @@ import com.match.team.migration_kotlin.domain.user.User
 import com.match.team.migration_kotlin.dto.file.FileDto
 import com.match.team.migration_kotlin.repository.file.UploadFileRepository
 import lombok.RequiredArgsConstructor
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
@@ -14,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile
 @RequiredArgsConstructor
 class FileService(
     private val fileRepository: UploadFileRepository,
+
+    @Qualifier("s3FileStore")
     private val fileStore: FileStore
 ) {
 

@@ -68,6 +68,9 @@ dependencies {
     // Spring Data Redis
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
+    // spring cloud AWS starter
+    implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+
     // MySQL
     runtimeOnly("com.mysql:mysql-connector-j")
 

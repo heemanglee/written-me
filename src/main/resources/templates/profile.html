@@ -25,7 +25,10 @@
           <label for="profile_image"></label>
           <div class="profile-image-container">
             <!-- user.uploadImageName가 null일 경우 기본 이미지 사용 -->
-            <img id="profile_image" th:src="${user.uploadImageName != null ? '/thumbnails/' + user.uploadImageName : '/images/default_user_img.png'}">
+            <div id="profile_image">
+              <img th:if="${imageUrl == null}" src="/images/default_user_img.png">
+              <img th:if="${imageUrl != null}" th:src="${imageUrl}">
+            </div>
             <input type="file" id="profileImageInput" name="profileImage" accept="image/*">
             <div class="button-container">
               <button type="button" id="profileImageEditBtn">이미지 수정</button>

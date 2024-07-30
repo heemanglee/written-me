@@ -56,7 +56,6 @@ $(function () {
   });
 
   $("#profileImageRemoveBtn").click(function () {
-    // let profileImage = $("#profile_image").attr("src");
     let profileImageName = $("#profileImageName").val()
 
     $.ajax({
