@@ -20,7 +20,7 @@ spring:
   data:
     redis:
       host: localhost
-      port: 6379
+      port: 6381
 
 openai:
   model: "gpt-3.5-turbo"
