@@ -51,8 +51,6 @@ class SecurityConfig(
             .authorizeHttpRequests { authorizeRequests ->
                 run {
                     authorizeRequests
-                        .requestMatchers(PathRequest.toH2Console())
-                        .permitAll()
                         .requestMatchers("/", "/users/sign-up/**", "/users/sign-in/**", "/api/users/sign-up/**", "/api/users/sign-in/**")
                         .permitAll()
                         .requestMatchers("/css/**", "/js/**")
