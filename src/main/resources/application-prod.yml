@@ -3,11 +3,8 @@ spring:
     activate:
       on-profile: prod
 
-  h2:
-    console:
-      enabled: true
   datasource:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${DB_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
