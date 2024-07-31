@@ -13,6 +13,6 @@ class HomeController {
     fun home(@AuthenticationPrincipal user: User?,
              model: Model): String {
         model.addAttribute("user", user)
-        return "/main"
+        return "main"
     }
 }

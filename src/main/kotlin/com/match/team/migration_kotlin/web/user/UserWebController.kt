@@ -20,7 +20,7 @@ class UserWebController(
 
     @GetMapping("/sign-up")
     fun signupPage(): String {
-        return "/sign-up"
+        return "sign-up"
     }
 
     @GetMapping("/sign-in")
