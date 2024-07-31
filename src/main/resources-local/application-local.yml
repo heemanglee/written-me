@@ -28,6 +28,9 @@ openai:
     key: ${OPEN_API_KEY}
     url: "https://api.openai.com/v1/chat/completions"
 
+openapi:
+  key: ${OPEN_API_KEY}
+
 cloud:
   aws:
     s3:

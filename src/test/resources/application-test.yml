@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/written_me
+    username: user
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  data:
+    redis:
+      host: localhost
+      port: 6381
+
+openai:
+  model: "gpt-3.5-turbo"
+  api:
+    key: "OPEN_API_KEY"
+    url: "https://api.openai.com/v1/chat/completions"
+
+cloud:
+  aws:
+    s3:
+      bucket: "BUCKET_NAME"
+    credentials:
+      access-key: "ACCESS_KEY"
+      secret-key: "SECRET_KEY"
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
