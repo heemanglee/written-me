@@ -87,21 +87,6 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-// profile 변수를 설정합니다. 로컬 환경에서는 "local", 서버 환경에서는 "prod"로 설정됩니다.
-val profile = project.findProperty("profile")?.toString() ?: "local"
-sourceSets {
-    // main 소스셋을 가져옵니다.
-    val main by getting {
-        // resources 블록 내에서 리소스 디렉토리를 설정합니다.
-        resources {
-            // srcDirs 메소드를 통해 리소스 디렉토리를 설정합니다.
-            // 기본 디렉토리인 "src/main/resources"와
-            // 프로파일에 따라 "src/main/resources-local" 또는 "src/main/resources-prod"를 추가로 설정합니다.
-            srcDirs("src/main/resources", "src/main/resources-$profile")
-        }
-    }
-}
-
 tasks.bootJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
