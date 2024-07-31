@@ -17,7 +17,7 @@ import java.util.*
 @Component
 @RequiredArgsConstructor
 class S3FileStore(
-    @Value("\${cloud.aws.s3.bucket}")
+    @Value("\${aws.s3.bucket}")
     private val bucket: String,
 
     private val amazonS3: AmazonS3

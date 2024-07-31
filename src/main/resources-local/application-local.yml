@@ -31,14 +31,13 @@ openai:
 openapi:
   key: ${OPEN_API_KEY}
 
-cloud:
-  aws:
-    s3:
-      bucket: ${BUCKET_NAME}
-    credentials:
-      access-key: ${ACCESS_KEY}
-      secret-key: ${SECRET_KEY}
-    stack:
-      auto: false
-    region:
-      static: ap-northeast-2
+aws:
+  s3:
+    bucket: ${BUCKET_NAME}
+  credentials:
+    access-key: ${ACCESS_KEY}
+    secret-key: ${SECRET_KEY}
+  stack:
+    auto: false
+  region:
+    static: ap-northeast-2

@@ -23,14 +23,13 @@ openai:
     key: "OPEN_API_KEY"
     url: "https://api.openai.com/v1/chat/completions"
 
-cloud:
-  aws:
-    s3:
-      bucket: "BUCKET_NAME"
-    credentials:
-      access-key: "ACCESS_KEY"
-      secret-key: "SECRET_KEY"
-    stack:
-      auto: false
-    region:
-      static: ap-northeast-2
+aws:
+  s3:
+    bucket: "BUCKET_NAME"
+  credentials:
+    access-key: "ACCESS_KEY"
+    secret-key: "SECRET_KEY"
+  stack:
+    auto: false
+  region:
+    static: ap-northeast-2
