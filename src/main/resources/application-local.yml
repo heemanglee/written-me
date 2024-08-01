@@ -1,14 +1,9 @@
 spring:
-  config:
-    activate:
-      on-profile: local
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3307/written_me
     username: user
     password: 1234
-
 
   jpa:
     hibernate:
@@ -27,9 +22,6 @@ openai:
   api:
     key: ${OPEN_API_KEY}
     url: "https://api.openai.com/v1/chat/completions"
-
-openapi:
-  key: ${OPEN_API_KEY}
 
 aws:
   s3:
