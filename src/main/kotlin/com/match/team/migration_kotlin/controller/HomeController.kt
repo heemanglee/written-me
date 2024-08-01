@@ -15,4 +15,9 @@ class HomeController {
         model.addAttribute("user", user)
         return "main"
     }
+
+    @GetMapping("/health")
+    fun health(): String {
+        return "Success Health Check"
+    }
 }
