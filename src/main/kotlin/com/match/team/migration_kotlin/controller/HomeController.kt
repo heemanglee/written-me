@@ -16,8 +16,4 @@ class HomeController {
         return "main"
     }
 
-    @GetMapping("/health")
-    fun health(): String {
-        return "Success Health Check"
-    }
 }
