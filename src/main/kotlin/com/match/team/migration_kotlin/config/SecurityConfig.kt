@@ -51,7 +51,8 @@ class SecurityConfig(
             .authorizeHttpRequests { authorizeRequests ->
                 run {
                     authorizeRequests
-                        .requestMatchers("/", "/users/sign-up/**", "/users/sign-in/**", "/api/users/sign-up/**", "/api/users/sign-in/**")
+                        .requestMatchers("/", "/users/sign-up/**", "/users/sign-in/**", "/api/users/sign-up/**", "/api/users/sign-in/**",
+                            "/health")
                         .permitAll()
                         .requestMatchers("/css/**", "/js/**")
                         .permitAll()
