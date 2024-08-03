@@ -18,6 +18,11 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Docker Compose 설치
+        run: |
+          sudo apt-get update
+          sudo apt-get install docker-compose -y
+
       - name: Setup MySQL And Redis
         run: docker-compose up -d
 
