@@ -67,7 +67,7 @@ jobs:
           script: |
             rm -rf /home/ubuntu/written-server/current
             mkdir /home/ubuntu/written-server/current
-            mv /home/ubuntu/written-server/tobe/written-me/project.jar /home/ubuntu/written-server/current/project.jar
+            mv /home/ubuntu/written-server/tobe/project.jar /home/ubuntu/written-server/current/project.jar
             cd /home/ubuntu/written-server/current
             sudo fuser -k -n tcp 8080 || true
             export DB_URL=${{ secrets.DB_URL }}
@@ -80,4 +80,4 @@ jobs:
             export ACCESS_KEY=${{ secrets.ACCESS_KEY }}
             export SECRET_KEY=${{ secrets.SECRET_KEY }}
             nohup java -jar project.jar --spring.profiles.active=prod > ./output.log 2>&1 &
-            rm -rf /home/ubuntu/written-server/tobe/written-me
+            rm -rf /home/ubuntu/written-server/tobe
