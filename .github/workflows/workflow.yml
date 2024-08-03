@@ -18,6 +18,9 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Setup MySQL And Redis
+        run: docker-compose up -d
+
       - name: gradlew 파일에 실행 권한 부여
         run: chmod +x ./gradlew
 
