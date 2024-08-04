@@ -14,6 +14,7 @@ import com.match.team.migration_kotlin.dto.diary.GetDiaryPasswordResponseDto
 import com.match.team.migration_kotlin.dto.diary.GetDiaryResponseDto
 import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.BooleanExpression
+import com.querydsl.core.types.dsl.Expressions
 import com.querydsl.jpa.JPAExpressions
 import com.querydsl.jpa.JPQLQuery
 import com.querydsl.jpa.impl.JPAQueryFactory
@@ -42,7 +43,7 @@ class DiaryRepositoryCustomImpl(
             .join(message).on(diary.message.id.eq(message.id)).fetchJoin()
             .join(QUser.user).on(diary.user.eq(QUser.user)).fetchJoin()
             .leftJoin(uploadFile).on(uploadFile.eq(QUser.user.profileImage)).fetchJoin()
-            .join(couple).on(couple.sender.eq(user).or(couple.receiver.eq(user))).fetchJoin()
+            .leftJoin(couple).on(couple.sender.eq(user).or(couple.receiver.eq(user))).fetchJoin()
             .where(filterByFeels(feels), isUserOrCoupleDiary(user))
             .fetch()
     }
@@ -137,12 +138,12 @@ class DiaryRepositoryCustomImpl(
     }
 
     private fun filterCategory(user: User, category: String): BooleanExpression? {
-        if (category == "all") {
-            return null
-        } else if (category == "personal") {
-            return diary.user.eq(user)
+        return when(category) {
+            "all" -> isUserOrCoupleDiary(user)
+            "personal" -> diary.user.eq(user)
+            else -> diary.user.id.eq(couple.sender.id).and(couple.receiver.id.eq(user.id))
+                .or(diary.user.id.eq(couple.receiver.id).and(couple.sender.id.eq(user.id)))
         }
-        return diary.user.ne(user)
     }
 
     private fun isUserOrCoupleDiary(user: User): BooleanExpression {

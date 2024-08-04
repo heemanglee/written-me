@@ -535,6 +535,7 @@ function removeModalBackground() {
 $(function() {
   $('input[name="personal-couple-filter"]').change(function() {
     var selectedValue = $('input[name="personal-couple-filter"]:checked').val();
+    alert(selectedValue);
     $.ajax({
       type: "get",
       url: `/api/diarys/${selectedValue}/items`,
