@@ -14,6 +14,8 @@ import com.match.team.migration_kotlin.dto.diary.GetDiaryPasswordResponseDto
 import com.match.team.migration_kotlin.dto.diary.GetDiaryResponseDto
 import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.BooleanExpression
+import com.querydsl.jpa.JPAExpressions
+import com.querydsl.jpa.JPQLQuery
 import com.querydsl.jpa.impl.JPAQueryFactory
 import lombok.RequiredArgsConstructor
 
@@ -40,8 +42,8 @@ class DiaryRepositoryCustomImpl(
             .join(message).on(diary.message.id.eq(message.id)).fetchJoin()
             .join(QUser.user).on(diary.user.eq(QUser.user)).fetchJoin()
             .leftJoin(uploadFile).on(uploadFile.eq(QUser.user.profileImage)).fetchJoin()
-            .leftJoin(couple).on(couple.sender.eq(user).or(couple.receiver.eq(user))).fetchJoin()
-            .where(filterByFeels(feels), eqUser(user))
+            .join(couple).on(couple.sender.eq(user).or(couple.receiver.eq(user))).fetchJoin()
+            .where(filterByFeels(feels), isUserOrCoupleDiary(user))
             .fetch()
     }
 
@@ -130,10 +132,6 @@ class DiaryRepositoryCustomImpl(
         }
     }
 
-    private fun eqUser(user: User): BooleanExpression {
-        return diary.user.eq(user).or(couple.sender.eq(user).or(couple.receiver.eq(user)))
-    }
-
     private fun eqYearAndMonth(year: Int, month: Int): BooleanExpression? {
         return diary.createdDate.year().eq(year).and(diary.createdDate.month().eq(month + 1))
     }
@@ -145,6 +143,22 @@ class DiaryRepositoryCustomImpl(
             return diary.user.eq(user)
         }
         return diary.user.ne(user)
+    }
+
+    private fun isUserOrCoupleDiary(user: User): BooleanExpression {
+        val coupleDiary = couple
+
+        val userIds: JPQLQuery<Long> = JPAExpressions
+            .select(
+                coupleDiary.sender.id
+                    .`when`(user.id).then(coupleDiary.receiver.id)
+                    .`otherwise`(coupleDiary.sender.id)
+            )
+            .from(coupleDiary)
+            .where(coupleDiary.sender.eq(user).or(coupleDiary.receiver.eq(user)))
+
+        return diary.user.id.eq(user.id)
+            .or(diary.user.id.`in`(userIds))
     }
 
 }
