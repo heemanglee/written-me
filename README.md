@@ -1,4 +1,4 @@
-## URL
+## 🔗 URL
 - 배포 URL : https://written-me.store (현재는 접속 안됩니다!)
 - Backend Repo : https://github.com/heemanglee/written-me 
 
@@ -50,10 +50,19 @@
       <img src="https://github.com/user-attachments/assets/719f5e9d-c2f0-4fde-89e6-06de02c3974b" width="500"/>
     </td>
   </tr>
+  <tr>
+    <td>
+      <p> 작성한 일기 조회</p>
+      <img src="https://github.com/user-attachments/assets/4ce3700c-67ec-4f6d-9dc7-de7839829fb5" width="500"/>
+    </td>
+  </tr>
 </table>
 
 ## 달력 페이지
 <img src="https://github.com/user-attachments/assets/f2f0b090-908d-45d2-9ccb-fc4b5bc01c9c" width="500"/>
+
+## 커플 등록
+<img src="https://github.com/user-attachments/assets/67783cb4-3d91-4d86-abb6-1bafcd9b7a08" width="500"/>
 
 <br><br>
 
