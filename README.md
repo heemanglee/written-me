@@ -15,6 +15,7 @@
 - AWS EC2, RDS(MySql), S3
 - OpenAI API
 - Nginx, certbot
+- Ajax, jQuery
 
 ### 배포 도구
 <img src="https://github.com/user-attachments/assets/c3d643c8-01be-412e-9de2-f3613aab811c" width="1000"/>
@@ -45,12 +46,6 @@
       <p> 기분 필터링</p>
       <img src="https://github.com/user-attachments/assets/9b00d7cc-b062-4990-9b8b-bd4bc23de129" width="500"/>
     </td>
-    <td>
-      <p> 전체, 개인, 상대방 일기 필터링</p>
-      <img src="https://github.com/user-attachments/assets/719f5e9d-c2f0-4fde-89e6-06de02c3974b" width="500"/>
-    </td>
-  </tr>
-  <tr>
     <td>
       <p> 작성한 일기 조회</p>
       <img src="https://github.com/user-attachments/assets/4ce3700c-67ec-4f6d-9dc7-de7839829fb5" width="500"/>
